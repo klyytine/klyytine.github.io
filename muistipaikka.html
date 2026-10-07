@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Muistipaikka - itse tehty muistiinpanoäppi | Kalle Lyytinen, dipl.ins.</title>
+<title>Tein AI äpin | Kalle Lyytinen, dipl.ins.</title>
 <meta name="description" content="Tee oma suomenkielinen Notion-klooni. Vaiheet ja kopioitavat kehotteet.">
 <link rel="stylesheet" href="assets/css/site.css">
 </head>
@@ -27,20 +27,20 @@
     <details class="mobile-menu" id="menu" open>
       <summary>Valikko</summary>
       <nav class="tree">
-<ul><li><a href="./index.html">Etusivu</a></li><li><a href="./cv.html">CV</a></li><li><a href="./projects.html">Projektit</a><ul class="children"><li><a href="./lumet.html">LUMET 2026</a></li><li><a href="./opiskeluaineisto-suomeksi.html">Oma opettaja</a></li><li><a href="./muistipaikka.html" class="current">Muistipaikka</a></li></ul></li><li><a href="./about.html">Minusta</a></li></ul>
+<ul><li><a href="./index.html">Etusivu</a></li><li><a href="./cv.html">CV</a></li><li><a href="./projects.html">Projektit</a><ul class="children"><li><a href="./lumet.html">UEF LUMET 2026 Day Poster</a></li><li><a href="./opiskeluaineisto-suomeksi.html">Tein MIT AI kurssin Tuutorin </a></li><li><a href="./muistipaikka.html" class="current">Tein apin muistiinpanoille</a></li></ul></li><li><a href="./about.html">Minusta</a></li></ul>
       </nav>
     </details>
   </aside>
 
   <main class="col-main">
-<h1 id="ensimmainen-agentti-oman-apin-teko-claude-coden-avulla">Ensimmäinen agentti - oman äpin teko Claude Coden avulla</h1>
+<h1 id="tee-agentti-oman-apin-teko-claude-coden-avulla">Tee agentti - oman äpin teko Claude Coden avulla</h1>
 <p>Netti on täynnä menestystarinoita, miten vibe-koodauksella on noustu ryysyistä rikkauksiin. Vibe-koodauksessa kielimallille kerrotaan omin sanoin, mistä on kyse ja mitä halutaan tehdä. Toisin sanoen laaditaan prompt eli komentokehote. Tekoäly rakentaa äpin eli sovelluksen. Se laatii tiedostorakenteen, tekee tiedostot, kirjoittaa koodin ja kehittää käyttöliittymän, kuvat ja äänet.<br />
 Hyvät puolet: kuka tahansa voi olla sovelluskehittäjä, prototyypit valmistuvat testattavaksi tunneissa ja omien työkalujen kehittäminen maksaa murto-osan siitä mitä aiemmin.
 Riskit: tekoälyn koodissa voi olla tietoturva-aukkoja, jos sitä ei valvota ja koodia tarkasteta. Koodi muuttuu spagetiksi, kun sovellus kasvaa suureksi. Ja kun (ei jos) äppiin tulee bugi eli virhe, sen korjaaminen voi olla vaikeaa ilman ohjelmointitaitoa.</p>
-<p><strong>Näytän seuraavaksi, miten teet oman sovelluksen kuten Notion. Tein sen tunnissa.</strong> Tarkoitus tällä on demota, miten vibe-koodaus sopii nopeaan kehitykseen. Toisaalta omien pienien apuäppien ja skriptien, kuten sähköpostin organisoijan, teko ja käyttö poistaa riippuvuuden teknojättien alustoista tai maksullisista palveluista.</p>
+<p><strong>Näytän seuraavaksi, miten teet oman sovelluksen.</strong> Tarkoitus tällä on demota, miten vibe-koodaus sopii nopeaan kehitykseen. Omien pienien apuäppien ja skriptien, kuten sähköpostin organisoijan, teko ja käyttö poistaa riippuvuuden teknojättien alustoista tai maksullisista palveluista. Oikea lisäarvo uudesta teknologiasta syntyy sen avustamisesta omaan työhön, ei siitä, että työssä on taas uusi softa tai muu tekniikkakilke opeteltavana, kun siihen ei edes ole koulutusta saati aikaa.</p>
 <p>Minun tietokoneen ympäristö:</p>
 <ul>
-<li>Windows 11 käyttöjärjestelmää (eng)</li>
+<li>Windows 11 Home käyttöjärjestelmää (eng)</li>
 <li>Claude Code</li>
 <li>Visual Studio Code</li>
 </ul>
@@ -49,23 +49,26 @@ Riskit: tekoälyn koodissa voi olla tietoturva-aukkoja, jos sitä ei valvota ja 
 <h2 id="mita-tarvitset">Mitä tarvitset</h2>
 <ul>
 <li>Tietokoneen: Windows 10 tai 11, tai macOS 13 tai uudempi, ja vähintään 4 Gt muistia.</li>
-<li><strong>Maksullisen Claude-tilauksen</strong> (Pro, Max, Team tai Enterprise). Ilmaistili ei riitä.</li>
-<li>Internetyhteyden ja noin tunnin aikaa.</li>
+<li>Muokkaus (admin) oikeudet tietokoneesi järjestelmiin. </li>
+<li><strong>Maksullisen Claude-tilauksen</strong> (Pro, Max, Team tai Enterprise). Claude Code tiliin voi olla mahdollista (toisinaan) hankkia vapaa kokeilujakso. </li>
+<li>Internetyhteyden ja aikaa. Jos kaikki menee ns. kuin strömsössä, valmista on tunnissa. </li>
 </ul>
-<p>Et tarvitse ohjelmointikokemusta, Gitiä, GitHub-tiliä, komentorivin osaamista, API-avainta tai palvelinta. Kaikki toimii omalla koneellasi.</p>
+<p>Et tarvitse ohjelmointikokemusta, Gitiä, GitHub-tiliä, komentorivin (CLI) osaamista, API-avainta tai palvelinta. Näistä kaikista on apua ja etua, mutta käsitellään ne erikseen. Keskeinen asia nyt: kaikki toimii omalla koneellasi + nettiyhteys.</p>
 <h2 id="asennus-ja-tyojarjestys">Asennus- ja työjärjestys</h2>
+<p>On mahdotonta tietää, mitä koneellasi on asennettu. Niinpä asennusjärjestys menee sen mukaan, että kaikki tässä esitetty asennetaan. </p>
 <ol>
-<li><strong>Asenna VS Code.</strong> Koodieditori, jossa työ tehdään.</li>
+<li><strong>Asenna VS Code.</strong> Koodieditori, jossa työ tehdään. Älä säikähdä "koodi" sanaa. Ei tarvitse koodata.</li>
 <li><strong>Asenna Node.js.</strong> Ohjelma, jolla sovellus pyörii.</li>
-<li><strong>Asenna Claude Code.</strong> Tekoälyavustaja VS Coden laajennuksena.</li>
+<li><strong>Asenna Claude Code.</strong> Tekoälyavustaja VS Coden laajennuksena. Claude hoitaa koodauksen.</li>
 <li><strong>Kirjaudu Claudeen.</strong> Yhdistä laajennus Claude-tiliisi.</li>
 <li><strong>Tee kansio.</strong> Sovelluksen tiedostot tulevat yhteen kansioon.</li>
-<li><strong>Tallenna rakennusohje.</strong> PROMPT.md kertoo tekoälylle, mitä tehdään.</li>
+<li><strong>Tallenna prompti eli rakennusohje.</strong> PROMPT.md kertoo tekoälylle, mitä tehdään.</li>
 <li><strong>Pyydä Claudea rakentamaan.</strong> Tekoäly kirjoittaa koodin.</li>
 <li><strong>Avaa ja kokeile.</strong> Muistipaikka aukeaa selaimessa.</li>
+<li><strong>Kerro tekoälylle, mitä apua tarvitset.</strong> Missä tahansa vaiheessa voit kysyä apua. Tekoäly ei tunne, häpeä tai ilku.  Se ei myöskään ymmärrä turhautumistasi. Sille ei tarvitse sanoa: "ole hyvä" tai "kiitos". Suomalainen, faktuaalinen ja asiakeskeinen esitystapa puree parhaiten. Esimerkiksi: "yritin tehdä ohjeen X mukaisen toimenpiteen Y. Sain virheilmoituksen Z. Opasta läpi ongelmasta, vaihe vaiheelta. En tiedä tästä asiasta mitään."</li>
 </ol>
 <h2 id="1-asenna-visual-studio-code">1. Asenna Visual Studio Code</h2>
-<p>VS Code on ilmainen koodieditori. Siinä näet tiedostot, joita tekoäly kirjoittaa, ja siinä keskustelet tekoälyn kanssa.</p>
+<p>VS Code on ilmainen koodieditori. Siinä näet tiedostot, joita tekoäly kirjoittaa, ja siinä keskustelet tekoälyn kanssa. Keskustelu on samanlainen web- tai työpöytäsovelluksen kanssa, mutta tässä rakennetaan paikallinen ohjelmistokehitysympäristö. </p>
 <ol>
 <li>Mene osoitteeseen <a href="https://code.visualstudio.com/">code.visualstudio.com</a> ja lataa oman käyttöjärjestelmäsi versio.</li>
 <li>Asenna ohjelma oletusasetuksilla. Windowsissa jätä rasti kohtaan <em>Add to PATH</em>.</li>
@@ -85,7 +88,7 @@ Riskit: tekoälyn koodissa voi olla tietoturva-aukkoja, jos sitä ei valvota ja 
 <li>Kirjoita hakuun <strong>Claude Code</strong>.</li>
 <li>Valitse laajennus, jonka julkaisija on <strong>Anthropic</strong>, ja paina <strong>Install</strong>.</li>
 </ol>
-<p><strong>Tarkista julkaisija.</strong> Asenna vain Anthropicin julkaisema laajennus. Samannimisiä laajennuksia voi olla muitakin.</p>
+<p><strong>Tarkista julkaisija.</strong> Asenna vain Anthropicin julkaisema laajennus. </p>
 <h2 id="4-kirjaudu-claudeen">4. Kirjaudu Claudeen</h2>
 <ol>
 <li>Napsauta VS Coden vasemmasta reunasta <strong>Claude Coden kuvaketta</strong> (oranssi tähtimäinen kuvake). Claude-paneeli avautuu.</li>
