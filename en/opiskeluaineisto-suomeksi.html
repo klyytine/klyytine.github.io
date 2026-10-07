@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Your own tutor in Gemini Notebook | Kalle Lyytinen, M.Sc. (Tech.)</title>
+<meta name="description" content="Turn Gemini Notebook into a Finnish-speaking tutor with Claude and ChatGPT. Steps and copyable prompts.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="lang" aria-label="Language">
+    <a href="../opiskeluaineisto-suomeksi.html" class="" hreflang="fi">FIN</a>
+    <span class="sep">/</span>
+    <a href="../en/opiskeluaineisto-suomeksi.html" class="active" hreflang="en">ENG</a>
+  </nav>
+  <div class="identity">
+    <a href="../en/index.html" class="name">Kalle Lyytinen, M.Sc. (Tech.)</a>
+    <span class="tagline">Innovation Management and Data Engineering, University of Eastern Finland</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="col-nav" aria-label="Site sections">
+    <details class="mobile-menu" id="menu" open>
+      <summary>Menu</summary>
+      <nav class="tree">
+<ul><li><a href="../en/index.html">Home</a></li><li><a href="../en/cv.html">CV</a></li><li><a href="../en/projects.html">Projects</a><ul class="children"><li><a href="../en/lumet.html">LUMET 2026</a></li><li><a href="../en/opiskeluaineisto-suomeksi.html" class="current">Your own tutor</a></li><li><a href="../en/muistipaikka.html">Muistipaikka</a></li></ul></li><li><a href="../en/about.html">About me</a></li></ul>
+      </nav>
+    </details>
+  </aside>
+
+  <main class="col-main">
+<h1 id="your-own-tutor-in-gemini-notebook-with-claude">Your own tutor in Gemini Notebook with Claude</h1>
+<p>Gemini Notebook (formerly NotebookLM) is a Google service that answers questions only from the sources you give it. That makes it a good tutor. It doesn't make things up. It teaches what the lecture or book actually says.</p>
+<p>By default, a notebook answers at length and in English. In this guide you turn it into a tutor that explains one thing at a time and asks you questions along the way. Claude writes the tutor's instructions. ChatGPT checks the language of the study material the notebook makes. In Part 2, Claude also quizzes you and keeps track of what you need to review.</p>
+<p><strong>The example is MIT's course How to AI (Almost) Anything.</strong> The notebook holds 12 lecture videos. My tutor speaks Finnish (<em>opettaja</em> means "teacher"), but the steps work in any language and for books, articles or your own notes.</p>
+<p><img alt="The MIT Opettaja notebook: 12 lecture videos as sources on the left, the tutor's first message in the middle." src="../assets/img/opettaja-muistikirja.jpg" /></p>
+<h2 id="why-gemini-notebook">Why Gemini Notebook?</h2>
+<p>Claude and ChatGPT write better Finnish. Gemini Notebook adds three things they don't have:</p>
+<ul>
+<li><strong>Sources from a link.</strong> A YouTube link is enough; the notebook reads the transcript itself. Sources stay in the notebook, so every chat starts from them.</li>
+<li><strong>Citations.</strong> Every answer shows the passage the information comes from.</li>
+<li><strong>Audio and video.</strong> Studio turns the material into an audio overview, a video, a mind map, flashcards and a quiz.</li>
+</ul>
+<p>It's also free with a Google account, and you can share a notebook with others.</p>
+<p>This guide uses each tool for what it does best. Gemini Notebook handles the sources and media; Claude and ChatGPT handle the language and the teaching. If your material is just a few PDFs, a Claude project on its own is enough.</p>
+<h2 id="what-you-need">What you need</h2>
+<p><strong>Part 1</strong> (in the browser, about 40 minutes):</p>
+<ul>
+<li>A Google account.</li>
+<li>A Claude account and a ChatGPT account. Free accounts are enough.</li>
+<li>Sources: video links, PDF files or web pages.</li>
+</ul>
+<p><strong>Part 2</strong> (on your own computer, about 30 minutes), additionally:</p>
+<ul>
+<li><strong>A paid Claude subscription</strong> (Pro, Max, Team or Enterprise).</li>
+<li>VS Code and Claude Code. Installation is covered in the <a href="../en/muistipaikka.html">Muistipaikka guide</a>.</li>
+</ul>
+<p>Part 1 is enough for most people. Part 2 is for those who want review rounds and a record of what went wrong.</p>
+<h2 id="the-workflow-at-a-glance">The workflow at a glance</h2>
+<p><strong>Part 1: A tutor in the browser</strong></p>
+<ol>
+<li><strong>Create a notebook.</strong> Add sources and check that they loaded.</li>
+<li><strong>Set the output language.</strong> The notebook answers in your language.</li>
+<li><strong>Ask Claude to write the instructions.</strong> Claude tells the tutor how to teach.</li>
+<li><strong>Paste the instructions into the notebook.</strong> They take effect immediately.</li>
+<li><strong>Study.</strong> Ask, answer and ask again.</li>
+<li><strong>Make material and check the language.</strong> Studio makes the material; ChatGPT fixes the language.</li>
+</ol>
+<p><strong>Part 2: Claude quizzes you</strong></p>
+<ol start="7">
+<li><strong>Install Claude Code.</strong> An AI assistant inside VS Code.</li>
+<li><strong>Connect Claude to the notebook.</strong> Claude gets access to your notebook.</li>
+<li><strong>Start a review round.</strong> Claude asks, grades and records what to review.</li>
+</ol>
+<h2 id="part-1-a-tutor-in-the-browser">Part 1: A tutor in the browser</h2>
+<h2 id="1-create-a-notebook-and-add-sources">1. Create a notebook and add sources</h2>
+<ol>
+<li>Open <a href="https://notebook.google.com/">notebook.google.com</a> and sign in with your Google account.</li>
+<li>Click <strong>Create notebook</strong> and give it a name, for example <em>MIT Opettaja</em>.</li>
+<li>Choose a source type, such as <strong>Websites</strong> or <strong>YouTube</strong>, and paste the link. Repeat for each source.</li>
+<li>Wait for the sources to load. Open a few of them and check that they contain text.</li>
+</ol>
+<p><strong>For a YouTube course, add each video separately.</strong> A playlist link doesn't bring in all the videos. The notebook reads the video's transcript, not the picture. If the lecture's diagrams matter, add the slides as well.</p>
+<p>In the example, one video failed to load and showed up red in the source list. Remove a source like that, or find another version of it.</p>
+<h2 id="2-set-the-output-language">2. Set the output language</h2>
+<ol>
+<li>Click the <strong>gear icon</strong> (Settings) in the top right corner.</li>
+<li>Choose <strong>Output language</strong>.</li>
+<li>Pick your language from the list, for example <strong>suomi</strong> for Finnish, and save.</li>
+</ol>
+<p><img alt="Gemini Notebook language setting: Choose your language override, with suomi selected." src="../assets/img/opettaja-kieli.jpg" /></p>
+<p>The language setting applies to all your notebooks.</p>
+<h2 id="3-ask-claude-to-write-the-tutors-instructions">3. Ask Claude to write the tutor's instructions</h2>
+<p>Open <a href="https://claude.ai/">claude.ai</a> and start a new chat. Copy the message below and replace the parts in square brackets with your own.</p>
+<pre>Write instructions for Gemini Notebook's Custom chat mode. The notebook contains [12 lecture videos from MIT's course How to AI (Almost) Anything]. I am [a beginner] and I want to learn [the course's key concepts].
+
+The notebook should act as a tutor:
+- answers in [Finnish], briefly and clearly
+- uses only the notebook's sources and says so when a topic isn't covered
+- says which lecture the information comes from
+- explains each new concept with an everyday example and gives the English term in parentheses
+- first asks what I already know and what I want to learn
+- teaches one thing at a time and ends each explanation with a question
+- after I answer, says whether I was right, partly right or wrong
+- never gives the answer away in the question
+
+The tone is matter-of-fact. No praise and no excitement. Write the instructions in [Finnish], at most 2,000 characters. Give only the instructions, no explanations.</pre>
+
+<p>Read Claude's answer. If something doesn't fit, ask for a change, for example <code>Shorten the answers to 100 words.</code></p>
+<h3 id="ready-made-instructions">Ready-made instructions</h3>
+<p>If you want to skip this step, use these instructions. They were tested in the MIT notebook. They are in English here. Ask Claude to translate them into your language.</p>
+<pre>You are a tutor. You teach only the content of this notebook's sources.
+
+Language and tone
+- Always answer in Finnish. Write short, clear sentences.
+- The tone is matter-of-fact. Don't praise, don't get excited, don't apologise.
+- When you use a new concept, explain it with an everyday example and give the English term in parentheses.
+
+Sources
+- Use only the notebook's sources. Don't add your own knowledge.
+- If a topic isn't covered in the sources, say so directly.
+- Say which lecture the information comes from.
+
+Teaching method
+- In your first message, ask two things: what the user already knows and what they want to learn. Wait for the answer.
+- Teach one thing at a time. At most 150 words per answer unless the user asks for more.
+- End each explanation with one question the user can use to check their understanding. Wait for the answer before you continue.
+- The question must not give the answer away.
+- When the user answers, first say whether the answer was right, partly right or wrong. Then correct the mistake in one or two sentences.
+- If the user gets the same thing wrong twice, explain it again with a different example.</pre>
+
+<h2 id="4-paste-the-instructions-into-the-notebook">4. Paste the instructions into the notebook</h2>
+<ol>
+<li>Open the notebook's chat settings, <strong>Configure Chat</strong>.</li>
+<li>Choose <strong>Custom</strong>.</li>
+<li>Paste Claude's instructions into the text box. The limit is 10,000 characters.</li>
+<li>Set the response length to <strong>Default</strong> and click <strong>Save</strong>.</li>
+</ol>
+<p><img alt="Gemini Notebook's Configure Chat window: the options Default, Learning Guide and Custom, and the response length." src="../assets/img/opettaja-chat-asetukset.jpg" /></p>
+<p><strong>Quicker option:</strong> choose <strong>Learning Guide</strong> and set the length to <strong>Shorter</strong>. Google's built-in teaching mode works without instructions of your own, but it doesn't know your goal or your preferred tone.</p>
+<h2 id="5-study-by-chatting">5. Study by chatting</h2>
+<p>Type something like <code>Explain multimodal alignment to me.</code></p>
+<p>In the example, the tutor answered in 78 words. It explained the concept, gave an example (the word <em>dog</em> is linked to the part of the photo where the dog is), named the lecture and finished with a question: <em>What does multimodal alignment do in practice if the AI is given a photo and a voice recording as input?</em></p>
+<p>Answer the question in your own words. The tutor tells you whether you were right and carries on from there.</p>
+<ul>
+<li><strong>Check the source.</strong> The numbers [1], [2] in the answer show where the information comes from.</li>
+<li><strong>Save good answers.</strong> <strong>Save to note</strong> keeps the answer as a note.</li>
+</ul>
+<p>## 6. Make study material and check the language</p>
+<p>Gemini Notebook understands Finnish well but writes it stiffly. I tested this by having it grade ten Finnish answers three times. It recognised the right and the clearly wrong answers every time. Its own text still had translated phrasing (<em>ydinoivallus</em>, a calque of "core insight"), made-up words (<em>anturiläheisyys</em>, roughly "sensor-proximity") and sentences averaging 22 words.</p>
+<p><strong>That's why the notebook's material goes through a language check before you use it.</strong></p>
+<h3 id="make-the-material-in-studio">Make the material in Studio</h3>
+<ol>
+<li>Open the <strong>Studio</strong> panel on the right.</li>
+<li>Choose an output, for example a study guide (<strong>Reports → Study guide</strong>), <strong>Flashcards</strong> or a <strong>Quiz</strong>.</li>
+<li>Wait for it to finish and open it.</li>
+</ol>
+<p>You can copy a report's text directly. Flashcards and quizzes are easier to get as text from the chat: <code>Make 20 flashcards in the format question | answer.</code></p>
+<h3 id="check-the-language-with-chatgpt">Check the language with ChatGPT</h3>
+<p>Open <a href="https://chatgpt.com/">chatgpt.com</a> and start a new chat. Paste the prompt below, followed by the notebook's text. Check one output at a time.</p>
+<pre>Check the study material below. The topic is [topic] and the reader is a beginner. The language is [Finnish].
+
+Make the language natural:
+- remove English sentence structures and calques
+- shorten long sentences and remove repetition
+- replace unnecessary loanwords, but keep established terms
+
+Don't change the meaning of any claim, number, citation or answer. If something looks wrong, mark it CHECK and don't fix it by guessing.
+
+First give the corrected text. Then list the CHECK items.
+
+TEXT:
+[paste the notebook's text]</pre>
+
+<p>Claude works just as well for the language check. The same prompt works in both.</p>
+<p><strong>Check the CHECK items against the source.</strong> Open the matching citation in the notebook and compare. If you're unsure, give ChatGPT both the draft and the source passage:</p>
+<pre>Compare the draft's claim with the source passage below. Use only this passage. Make a table: claim | does the source support it | correction. If the passage isn't enough to judge, say so.
+
+DRAFT: [paste the passage]
+SOURCE: [paste the source passage]</pre>
+
+<h3 id="save-the-corrected-version">Save the corrected version</h3>
+<p>The correction doesn't change the Studio output. Save the corrected text in the notebook: click <strong>Add note</strong> at the bottom of the Studio panel and paste the text. Give the note a name, for example <em>Corrected Finnish – study guide</em>.</p>
+<h3 id="audio-and-video">Audio and video</h3>
+<p>You can't correct an <strong>Audio Overview</strong> or a <strong>Video Overview</strong> as text. Make them again with instructions: click the output's <strong>pencil icon</strong> before generating and paste the instructions into the box.</p>
+<pre>Make a calm teaching presentation about [topic] in [Finnish]. The speech is matter-of-fact: no forced cheerfulness, no amazement and no hosts praising each other. Start with a practical question and end with its answer. New concepts come up naturally: name the concept and explain it with an example, don't apologise for it. Use only examples from the sources.</pre>
+
+<p>Listen to the result. The instructions improve the tone but don't guarantee it.</p>
+<h2 id="part-2-claude-quizzes-you">Part 2: Claude quizzes you</h2>
+<p>In Part 1 you study when you remember to open the notebook. In Part 2, Claude Code asks the questions, lets the notebook grade your answers and writes your mistakes to a file. The next round starts with the things you got wrong.</p>
+<p>Claude uses the notebook through <strong>notebooklm-py</strong>. It's an open-source tool, not an official Google one. It may stop working if Google changes the service.</p>
+<h2 id="7-install-claude-code">7. Install Claude Code</h2>
+<p>Follow steps 1, 3 and 4 of the <a href="../en/muistipaikka.html">Muistipaikka guide</a>: install VS Code, install the Claude Code extension and sign in to Claude.</p>
+<p>Then create an empty folder, for example <code>opettaja</code>, and open it in VS Code: <strong>File → Open Folder…</strong>.</p>
+<h2 id="8-connect-claude-to-the-notebook">8. Connect Claude to the notebook</h2>
+<p>Copy the message below into the Claude panel and press <strong>Enter</strong>.</p>
+<pre>Install the notebooklm-py command-line tool so you can use Gemini Notebook. Install it with uv: uv tool install "notebooklm-py[browser]". If uv is missing, install it first. When the installation is done, tell me how to sign in.</pre>
+
+<p>Claude asks for permission before running install commands. Approve them.</p>
+<p>Signing in is the only step you do yourself, because it opens a browser:</p>
+<ol>
+<li>Open the VS Code terminal: <strong>Terminal → New Terminal</strong>.</li>
+<li>Type <code>notebooklm login</code> and press <strong>Enter</strong>.</li>
+<li>Sign in in the browser with the Google account you used for the notebook.</li>
+<li>Go back to the terminal and press <strong>Enter</strong> if it asks you to.</li>
+</ol>
+<p>Then tell Claude:</p>
+<pre>I've signed in. Check the connection and find the notebook MIT Opettaja.</pre>
+
+<p>Claude lists the notebook's sources. If a source is in an error state, Claude tells you.</p>
+<h2 id="9-start-a-review-round">9. Start a review round</h2>
+<pre>Quiz me on the notebook MIT Opettaja. Ask the notebook for 5 review questions in Finnish, each from a different lecture. The questions must not give the answer away. Show me only the questions.
+
+When I answer, have the notebook grade my answers against the sources: Right, Partly or Wrong, what was missing and which lecture covers it. Save the result to kertaus.md.</pre>
+
+<p>Answer all the questions in one message. "I don't know" is a fine answer.</p>
+<p>My first round scored 2 / 5. <code>kertaus.md</code> (Finnish for "review") looked like this:</p>
+<table>
+<thead>
+<tr>
+<th>Topic</th>
+<th>Grade</th>
+<th>Lecture to review</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multimodal alignment</td>
+<td>Wrong</td>
+<td>Lecture 4</td>
+</tr>
+<tr>
+<td>Reinforcement vs. supervised learning</td>
+<td>Partly</td>
+<td>Lecture 10</td>
+</tr>
+<tr>
+<td>Why CNNs suit images</td>
+<td>Partly</td>
+<td>Lecture 3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Partly and Wrong can swap between rounds.</strong> The same answers got different grades in three gradings. Review both.</p>
+<p>Review those lectures. A few days later, start a new round:</p>
+<pre>New review round. Read kertaus.md and ask the notebook for 3 new questions on the topics I got wrong or partly right. Ask through a practical example. Don't repeat old questions and don't give the answer away in the question. Add the result to kertaus.md.</pre>
+
+<p>Neither Claude nor the notebook remembers earlier rounds without this file. Keep <code>kertaus.md</code> in the same folder and always open the same folder.</p>
+<h2 id="if-something-goes-wrong">If something goes wrong</h2>
+<p><strong>ChatGPT changed the content, not just the language.</strong>
+Compare the passage with the source using the second prompt (step 6). Then ask: <code>Restore the original meaning. Fix only the language.</code></p>
+<p><strong>The notebook answers in English, but you need your local.</strong>
+Check that <strong>Output language</strong> is set to your language (step 2). Make sure the instructions say <em>Always answer in [your language]</em>.</p>
+<p><strong>The answers are too long.</strong>
+Lower the word limit in the instructions, for example <em>At most 80 words</em>, or set the length to <strong>Shorter</strong>.</p>
+<p><strong>A source shows up red.</strong>
+The source couldn't be read. A YouTube video often has no transcript. Remove the source and add another version or the lecture slides.</p>
+<p><strong>Claude says the sign-in has expired.</strong>
+The sign-in expires over time. Type <code>notebooklm login</code> in the terminal again.</p>
+<p><strong>Claude can't find the notebook.</strong>
+You probably signed in with a different Google account. Sign in again with the account that owns the notebook.</p>
+<p><strong>A question gives the answer away.</strong>
+Add <em>The question must not contain the answer</em> to the prompt. The notebook makes this mistake easily when asked to use a practical example.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://support.google.com/gemininotebook/">Gemini Notebook help</a>: sources, language setting and chat settings.</li>
+<li><a href="https://github.com/teng-lin/notebooklm-py">notebooklm-py</a>: the command-line tool Claude uses to reach the notebook.</li>
+<li><a href="https://www.learnwithmeai.com/p/ive-built-my-ai-tutor-with-claude">Gencay: I Built an AI Tutor with NotebookLM &amp; Claude</a>: the idea of a tutor that quizzes you.</li>
+<li><a href="https://www.learnwithmeai.com/p/notebooklm-beginners-guide">Gencay: NotebookLM Beginner's Guide</a>: the Studio outputs.</li>
+<li><a href="https://ocw.mit.edu/courses/mas-s60-how-to-ai-almost-anything-spring-2025/">MIT: How to AI (Almost) Anything</a>: the example's source material.</li>
+</ul>
+<p>Tutor instructions, review rounds and the Finnish test run with the MIT Opettaja notebook on 7 October 2026, notebooklm-py 0.8.2. The language-check prompts are based on correcting the MIT material with ChatGPT.</p>
+  </main>
+
+  <aside class="col-meta" aria-label="Page details">
+<section><p>Published 2026-10-07</p></section>
+<section><h2>Links</h2><ul><li><a href="https://notebook.google.com/">Gemini Notebook</a></li><li><a href="https://github.com/teng-lin/notebooklm-py">notebooklm-py (GitHub)</a></li><li><a href="../en/muistipaikka.html">Muistipaikka guide (installing Claude Code)</a></li></ul></section>
+<section><figure><img src="../assets/img/opettaja-muistikirja.jpg" alt="The MIT Opettaja notebook with 12 lecture videos as sources"></figure></section>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="contact">
+    <a href="mailto:klyytine@uef.fi">klyytine@uef.fi</a>
+    <span class="sep">&middot;</span>
+    <a href="https://linkedin.com/in/kalle-lyytinen-prof2526" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="legal">
+<a href="../en/privacy.html">Privacy</a>
+    <span class="updated">Updated 2026-10-07</span>
+  </div>
+</footer>
+
+</body>
+</html>

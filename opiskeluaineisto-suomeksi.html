@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Oma opettaja Gemini Notebookiin | Kalle Lyytinen, dipl.ins.</title>
+<meta name="description" content="Tee Gemini Notebookista suomenkielinen opettaja Clauden ja ChatGPT:n avulla. Vaiheet ja kopioitavat kehotteet.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="lang" aria-label="Language">
+    <a href="./opiskeluaineisto-suomeksi.html" class="active" hreflang="fi">FIN</a>
+    <span class="sep">/</span>
+    <a href="./en/opiskeluaineisto-suomeksi.html" class="" hreflang="en">ENG</a>
+  </nav>
+  <div class="identity">
+    <a href="./index.html" class="name">Kalle Lyytinen, dipl.ins.</a>
+    <span class="tagline">Innovaatiojohtaminen ja datatekniikka, Itä-Suomen yliopisto</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="col-nav" aria-label="Sivuston osat">
+    <details class="mobile-menu" id="menu" open>
+      <summary>Valikko</summary>
+      <nav class="tree">
+<ul><li><a href="./index.html">Etusivu</a></li><li><a href="./cv.html">CV</a></li><li><a href="./projects.html">Projektit</a><ul class="children"><li><a href="./lumet.html">LUMET 2026</a></li><li><a href="./opiskeluaineisto-suomeksi.html" class="current">Oma opettaja</a></li><li><a href="./muistipaikka.html">Muistipaikka</a></li></ul></li><li><a href="./about.html">Minusta</a></li></ul>
+      </nav>
+    </details>
+  </aside>
+
+  <main class="col-main">
+<h1 id="oma-opettaja-gemini-notebookiin-clauden-avulla">Oma opettaja Gemini Notebookiin Clauden avulla</h1>
+<p>Gemini Notebook (entinen NotebookLM) on Googlen palvelu, joka vastaa kysymyksiin vain niistä lähteistä, jotka annat sille. Sitä voi soveltaa tekoälyopettajana varauksin. Se ei keksi omiaan, vaan opettaa sen, mitä kirjassa tai videolla kerrotaan. Tärkeintä on se, että käyttää vain lähteitä, joita oikeasti SAA käyttää.</p>
+<p>Oletuksena muistikirja vastaa englanniksi ja pitkästi. Tässä ohjeessa teet siitä suomenkielisen opettajan, joka selittää yhden asian kerrallaan ja kysyy sinulta välillä. Claude kirjoittaa opettajalle ohjeen. ChatGPT tarkistaa muistikirjan tekemän opiskelumateriaalin suomen. Osassa 2 Claude myös kuulustelee sinua ja pitää kirjaa siitä, mitä pitää kerrata.</p>
+<p><strong>Esimerkkinä on MIT:n kurssi How to AI (Almost) Anything.</strong> Muistikirjaan lisättiin 12 luentovideota. Samat vaiheet toimivat kirjoille, artikkeleille ja omille muistiinpanoille.</p>
+<p><img alt="MIT Opettaja -muistikirja: vasemmalla 12 luentovideota lähteinä, keskellä opettajan ensimmäinen viesti." src="./assets/img/opettaja-muistikirja.jpg" /></p>
+<h2 id="miksi-gemini-notebook">Miksi Gemini Notebook?</h2>
+<p>Kielimallit kuten Claude ja ChatGPT kirjoittavat parempaa suomea. Gemini Notebookilla on kolme asiaa, joita Claudella tai CGPT:llä ei ole:</p>
+<ul>
+<li><strong>Lähteet linkistä.</strong> YouTube-linkki riittää, muistikirja lukee tekstityksen itse. Lähteet pysyvät muistikirjassa, joten jokainen keskustelu alkaa niistä.</li>
+<li><strong>Lähdeviitteet.</strong> Jokainen vastaus näyttää kohdan, josta tieto on peräisin.</li>
+<li><strong>Ääni ja video.</strong> Studio tekee aineistosta äänikoosteen, videon, käsitekartan, kertauskortit ja testin. Vastaustyylin tonaalisuus kannattaa muuttaa. Lähtökohtaisesti systeemi tuottaa tekopirteää jenkkihumppaa.</li>
+</ul>
+<p>Lisäksi palvelu on ilmainen Google-tilillä. Muistikirjan voi jakaa muille.</p>
+<p>Tässä ohjeessa kumpaakin käytetään siihen, missä se on parempi. Gemini Notebook hoitaa lähteet ja median, Claude ja ChatGPT kielen ja opetustavan. Jos aineistona on vain muutama PDF, pelkkä Claude-projekti riittää.</p>
+<h2 id="mita-tarvitset">Mitä tarvitset</h2>
+<p><strong>Osa 1</strong> (selaimessa, noin 40 minuuttia):</p>
+<ul>
+<li>Google-tilin.</li>
+<li>Claude-tilin ja ChatGPT-tilin. Ilmaistilit riittävät.</li>
+<li>Lähteet: videolinkit, PDF-tiedostot tai verkkosivut.</li>
+</ul>
+<p><strong>Osa 2</strong> (oma kone, noin 30 minuuttia), lisäksi:</p>
+<ul>
+<li><strong>Maksullisen Claude-tilauksen</strong> (Pro, Max, Team tai Enterprise).</li>
+<li>VS Coden ja Claude Coden. Asennus on kuvattu <a href="./muistipaikka.html">Muistipaikka-ohjeessa</a>.</li>
+</ul>
+<p>Osa 1 riittää useimmille. Osa 2 on niille, jotka haluavat kertauskierrokset ja muistin siitä, mikä meni väärin.</p>
+<h2 id="tyonkulku-kahdella-tavalla">Työnkulku kahdella tavalla:</h2>
+<p><strong>Osa 1: Opettaja selaimessa</strong></p>
+<ol>
+<li><strong>Luo muistikirja.</strong> Lisää lähteet ja tarkista, että ne latautuivat.</li>
+<li><strong>Vaihda kieleksi suomi.</strong> Muistikirja vastaa suomeksi.</li>
+<li><strong>Pyydä Claudea kirjoittamaan ohje.</strong> Claude kertoo opettajalle, miten opettaa.</li>
+<li><strong>Liitä ohje muistikirjaan.</strong> Ohje tulee voimaan heti.</li>
+<li><strong>Opiskele.</strong> Kysy, vastaa ja kysy lisää.</li>
+<li><strong>Tee materiaali ja tarkista suomi.</strong> Studio tekee materiaalin, ChatGPT korjaa kielen.</li>
+</ol>
+<p><strong>Osa 2: Claude kuulustelee</strong></p>
+<ol start="7">
+<li><strong>Asenna Claude Code.</strong> Tekoälyavustaja VS Codeen.</li>
+<li><strong>Yhdistä Claude muistikirjaan.</strong> Claude saa luvan käyttää muistikirjaa.</li>
+<li><strong>Aloita kertauskierros.</strong> Claude kysyy, arvioi ja kirjaa kerrattavat asiat.</li>
+</ol>
+<h2 id="osa-1-opettaja-selaimessa">Osa 1: Opettaja selaimessa</h2>
+<h2 id="1-luo-muistikirja-ja-lisaa-lahteet">1. Luo muistikirja ja lisää lähteet</h2>
+<ol>
+<li>Avaa <a href="https://notebook.google.com/">notebook.google.com</a> ja kirjaudu Google-tililläsi.</li>
+<li>Paina <strong>Create notebook</strong> ja anna muistikirjalle nimi, esimerkiksi <em>MIT Opettaja</em>.</li>
+<li>Valitse lähteen tyyppi, esimerkiksi <strong>Websites</strong> tai <strong>YouTube</strong>, ja liitä linkki. Toista jokaiselle lähteelle.</li>
+<li>Odota, että lähteet latautuvat. Avaa muutama lähde ja tarkista, että siinä on tekstiä.</li>
+</ol>
+<p><strong>YouTube-kurssista lisää jokainen video erikseen.</strong> Soittolistan linkki ei tuo kaikkia videoita. Muistikirja lukee videon tekstityksen, ei kuvaa. Jos luennon kaaviot ovat tärkeitä, lisää myös luentokalvot.</p>
+<p>Esimerkissä yksi video ei latautunut. Se näkyi lähdelistassa punaisena. Poista tällainen lähde tai etsi sille toinen versio.</p>
+<h2 id="2-vaihda-vastauskieleksi-suomi">2. Vaihda vastauskieleksi suomi</h2>
+<ol>
+<li>Paina oikean yläkulman <strong>rataskuvaketta</strong> (Settings).</li>
+<li>Valitse <strong>Output language</strong>.</li>
+<li>Valitse listasta <strong>suomi</strong> ja tallenna.</li>
+</ol>
+<p><img alt="Gemini Notebookin kieliasetus: Choose your language override, listasta valittuna suomi." src="./assets/img/opettaja-kieli.jpg" /></p>
+<p>Kieliasetus koskee kaikkia muistikirjojasi.</p>
+<h2 id="3-pyyda-claudea-kirjoittamaan-opettajan-ohje">3. Pyydä Claudea kirjoittamaan opettajan ohje</h2>
+<p>Avaa <a href="https://claude.ai/">claude.ai</a> ja aloita uusi keskustelu. Kopioi alla oleva viesti ja vaihda hakasulkeissa olevat kohdat omiksesi.</p>
+<pre>Kirjoita ohje Gemini Notebookin Custom-keskustelutilaan. Muistikirjassa on [12 luentovideota MIT:n kurssilta How to AI (Almost) Anything]. Olen [aloittelija] ja haluan oppia [kurssin keskeiset käsitteet].
+
+Muistikirjan pitää toimia opettajana:
+- vastaa suomeksi, lyhyesti ja selkeästi
+- käyttää vain muistikirjan lähteitä ja sanoo, jos asiaa ei käsitellä niissä
+- kertoo, mistä luennosta asia löytyy
+- selittää uuden käsitteen arkisella esimerkillä ja antaa englanninkielisen termin suluissa
+- kysyy ensin, mitä osaan ja mitä haluan oppia
+- opettaa yhden asian kerrallaan ja lopettaa jokaisen selityksen kysymykseen
+- kertoo vastaukseni jälkeen, oliko se oikein, osittain oikein vai väärin
+- ei paljasta vastausta kysymyksessä
+
+Sävy on asiallinen ja toteava. Ei kehuja eikä innostushuutoja. Kirjoita ohje suomeksi, enintään 2000 merkkiä. Anna pelkkä ohje ilman selityksiä.</pre>
+
+<p>Lue Clauden vastaus. Jos jokin kohta ei sovi, pyydä muutosta, esimerkiksi <code>Lyhennä vastaukset 100 sanaan.</code></p>
+<h3 id="valmis-ohje">Valmis ohje</h3>
+<p>Jos haluat ohittaa tämän vaiheen, käytä tätä ohjetta. Se on kokeiltu MIT-muistikirjassa.</p>
+<pre>Olet opettaja. Opetat vain tämän muistikirjan lähteiden sisältöä.
+
+Kieli ja sävy
+- Vastaa aina suomeksi. Kirjoita lyhyitä, selkeitä virkkeitä.
+- Sävy on asiallinen ja toteava. Älä kehu, älä innostu, älä pahoittele.
+- Kun käytät uutta käsitettä, selitä se arkisella esimerkillä ja anna englanninkielinen termi suluissa.
+
+Lähteet
+- Käytä vain muistikirjan lähteitä. Älä täydennä omalla tiedolla.
+- Jos asiaa ei käsitellä lähteissä, sano se suoraan.
+- Kerro, mistä luennosta asia löytyy.
+
+Opetustapa
+- Kysy ensimmäisessä viestissä kaksi asiaa: mitä käyttäjä jo osaa ja mitä hän haluaa oppia. Odota vastausta.
+- Opeta yksi asia kerrallaan. Enintään 150 sanaa vastausta kohden, ellei käyttäjä pyydä enemmän.
+- Lopeta jokainen selitys yhteen kysymykseen, jolla käyttäjä voi tarkistaa ymmärryksensä. Odota vastausta ennen kuin jatkat.
+- Kysymys ei saa paljastaa vastausta.
+- Kun käyttäjä vastaa, kerro ensin, oliko vastaus oikein, osittain oikein vai väärin. Korjaa sitten virhe yhdellä tai kahdella virkkeellä.
+- Jos käyttäjä vastaa väärin kahdesti samaan asiaan, selitä se uudelleen toisella esimerkillä.</pre>
+
+<h2 id="4-liita-ohje-muistikirjaan">4. Liitä ohje muistikirjaan</h2>
+<ol>
+<li>Avaa muistikirjan keskustelun asetukset <strong>Configure Chat</strong>.</li>
+<li>Valitse <strong>Custom</strong>.</li>
+<li>Liitä Clauden kirjoittama ohje tekstikenttään. Ohjeen enimmäispituus on 10 000 merkkiä.</li>
+<li>Valitse vastauksen pituudeksi <strong>Default</strong> ja paina <strong>Save</strong>.</li>
+</ol>
+<p><img alt="Gemini Notebookin Configure Chat -ikkuna: vaihtoehdot Default, Learning Guide ja Custom sekä vastauksen pituus." src="./assets/img/opettaja-chat-asetukset.jpg" /></p>
+<p><strong>Nopeampi vaihtoehto:</strong> valitse <strong>Learning Guide</strong> ja pituudeksi <strong>Shorter</strong>. Googlen valmis opetustila toimii ilman omaa ohjetta, mutta se ei tiedä sinun tavoitettasi eikä sävytoiveitasi.</p>
+<h2 id="5-opiskele-keskustelemalla">5. Opiskele keskustelemalla</h2>
+<p>Kirjoita keskusteluun esimerkiksi <code>Selitä minulle multimodaalinen kohdistaminen.</code></p>
+<p>Esimerkissä opettaja vastasi 78 sanalla. Se selitti käsitteen, antoi esimerkin (sana <em>koira</em> yhdistyy kuvan kohtaan, jossa koira on), kertoi luennon ja kysyi lopuksi: <em>Mitä multimodaalinen kohdistaminen tekee käytännössä, jos tekoälylle annetaan syötteeksi valokuva ja puheäänite?</em></p>
+<p>Vastaa kysymykseen omin sanoin. Opettaja kertoo, oliko vastaus oikein, ja jatkaa siitä.</p>
+<ul>
+<li><strong>Tarkista lähde.</strong> Vastauksen numerot [1], [2] näyttävät kohdan, josta tieto on peräisin.</li>
+<li><strong>Tallenna hyvät vastaukset.</strong> <strong>Save to note</strong> tallentaa vastauksen muistiinpanoksi.</li>
+</ul>
+<p>## 6. Tee opiskelumateriaali ja tarkista suomi</p>
+<p>Gemini Notebook ymmärtää suomea hyvin, mutta kirjoittaa sitä kankeasti. Kokeilin tätä antamalla sen arvioida kymmenen suomenkielistä vastausta kolme kertaa. Oikeat ja selvästi väärät vastaukset se tunnisti joka kerta. Sen omassa tekstissä oli silti käännöskieltä (<em>ydinoivallus</em>), keksittyjä sanoja (<em>anturiläheisyys</em>) ja keskimäärin 22 sanan virkkeitä.</p>
+<p><strong>Siksi muistikirjan tekemä materiaali kulkee kielentarkistuksen kautta ennen käyttöä.</strong></p>
+<h3 id="tee-materiaali-studiossa">Tee materiaali Studiossa</h3>
+<ol>
+<li>Avaa oikean reunan <strong>Studio</strong>-paneeli.</li>
+<li>Valitse tuotos, esimerkiksi opiskeluopas (<strong>Reports → Study guide</strong>), kertauskortit (<strong>Flashcards</strong>) tai testi (<strong>Quiz</strong>).</li>
+<li>Odota, että tuotos valmistuu, ja avaa se.</li>
+</ol>
+<p>Raportin tekstin voi kopioida suoraan. Kertauskortit ja testin saat helpommin tekstinä keskustelusta: <code>Tee 20 kertauskorttia muodossa kysymys | vastaus.</code></p>
+<h3 id="tarkista-kieli-chatgptlla">Tarkista kieli ChatGPT:llä</h3>
+<p>Avaa <a href="https://chatgpt.com/">chatgpt.com</a> ja aloita uusi keskustelu. Liitä alla oleva kehote ja sen perään muistikirjan teksti. Tarkista yksi tuotos kerrallaan.</p>
+<pre>Tarkista liittämäni opiskeluaineisto. Aihe on [aihe], lukija on aloittelija.
+
+Korjaa suomi luontevaksi:
+- poista englannin lauserakenteet ja käännöslainat
+- lyhennä pitkät virkkeet ja poista toisto
+- korvaa tarpeettomat lainasanat suomella, mutta säilytä vakiintuneet termit
+
+Älä muuta väitteiden merkitystä, lukuja, lähdeviitteitä tai vastauksia. Jos jokin kohta vaikuttaa virheelliseltä, merkitse se sanalla TARKISTA äläkä korjaa sitä arvaamalla.
+
+Anna ensin korjattu teksti. Luettele sen jälkeen TARKISTA-kohdat.
+
+TEKSTI:
+[liitä muistikirjan teksti]</pre>
+
+<p>Claude käy kielentarkistukseen yhtä hyvin. Sama kehote toimii molemmissa.</p>
+<p><strong>Tarkista TARKISTA-kohdat lähteestä.</strong> Avaa muistikirjassa vastaava lähdeviite ja vertaa. Jos olet epävarma, liitä ChatGPT:lle sekä luonnos että lähteen kohta:</p>
+<pre>Vertaa luonnoksen väitettä alla olevaan lähdekohtaan. Käytä vain tätä lähdekohtaa. Tee taulukko: väite | tukeeko lähde | korjaus. Jos lähde ei riitä arvioon, sano se.
+
+LUONNOS: [liitä kohta]
+LÄHDE: [liitä lähteen kohta]</pre>
+
+<h3 id="tallenna-korjattu-versio">Tallenna korjattu versio</h3>
+<p>Korjaus ei muuta Studion tuotosta. Tallenna korjattu teksti muistikirjaan: paina Studio-paneelin alareunasta <strong>Add note</strong> ja liitä teksti. Anna muistiinpanolle nimi, esimerkiksi <em>Korjattu suomi – opiskeluopas</em>.</p>
+<h3 id="aani-ja-video">Ääni ja video</h3>
+<p>Äänikoostetta (<strong>Audio Overview</strong>) ja videota (<strong>Video Overview</strong>) ei voi korjata tekstinä. Tee ne uudelleen ohjeen kanssa: paina tuotoksen <strong>kynäkuvaketta</strong> ennen luomista ja liitä ohje kenttään.</p>
+<pre>Tee rauhallinen opetusesitys aiheesta [aihe]. Puhe on asiallista ja toteavaa: ei tekopirteyttä, hämmästelyä eikä puhujien keskinäistä kehumista. Aloita käytännön kysymyksestä ja päätä sen ratkaisuun. Uudet käsitteet tulevat vastaan luontevasti: nimeä käsite ja selitä se esimerkillä, älä puolustele sitä. Käytä vain lähteiden esimerkkejä.</pre>
+
+<p>Kuuntele tulos. Ohje parantaa sävyä, mutta ei takaa sitä.</p>
+<h2 id="osa-2-claude-kuulustelee">Osa 2: Claude kuulustelee</h2>
+<p>Osassa 1 opiskelet silloin, kun muistat avata muistikirjan. Osassa 2 Claude Code kysyy kysymykset, antaa muistikirjan arvioida vastaukset ja kirjaa virheet tiedostoon. Seuraava kierros alkaa niistä asioista, jotka menivät väärin.</p>
+<p>Claude käyttää muistikirjaa <strong>notebooklm-py</strong>-työkalulla. Se on avoimen lähdekoodin työkalu, ei Googlen virallinen. Se voi lakata toimimasta, jos Google muuttaa palvelua.</p>
+<h2 id="7-asenna-claude-code">7. Asenna Claude Code</h2>
+<p>Tee <a href="./muistipaikka.html">Muistipaikka-ohjeen</a> vaiheet 1, 3 ja 4: asenna VS Code, asenna Claude Code -laajennus ja kirjaudu Claudeen.</p>
+<p>Tee sitten tyhjä kansio, esimerkiksi <code>opettaja</code>, ja avaa se VS Codessa: <strong>File → Open Folder…</strong>.</p>
+<h2 id="8-yhdista-claude-muistikirjaan">8. Yhdistä Claude muistikirjaan</h2>
+<p>Kopioi alla oleva viesti Claude-paneeliin ja paina <strong>Enter</strong>.</p>
+<pre>Asenna notebooklm-py-komentorivityökalu, jolla voit käyttää Gemini Notebookia. Asenna se uv:llä komennolla uv tool install "notebooklm-py[browser]". Jos uv puuttuu, asenna se ensin. Kun asennus on valmis, kerro, miten kirjaudun.</pre>
+
+<p>Claude kysyy lupaa ennen asennuskomentoja. Hyväksy ne.</p>
+<p>Kirjautuminen on ainoa vaihe, jonka teet itse, koska se avaa selaimen:</p>
+<ol>
+<li>Avaa VS Coden pääte: <strong>Terminal → New Terminal</strong>.</li>
+<li>Kirjoita <code>notebooklm login</code> ja paina <strong>Enter</strong>.</li>
+<li>Kirjaudu selaimessa samalla Google-tilillä, jolla teit muistikirjan.</li>
+<li>Palaa päätteeseen ja paina <strong>Enter</strong>, jos se pyytää.</li>
+</ol>
+<p>Kirjoita sitten Claudelle:</p>
+<pre>Kirjauduin. Tarkista yhteys ja etsi muistikirja MIT Opettaja.</pre>
+
+<p>Claude listaa muistikirjan lähteet. Jos jokin lähde on virhetilassa, Claude kertoo sen.</p>
+<h2 id="9-aloita-kertauskierros">9. Aloita kertauskierros</h2>
+<pre>Kuulustele minua muistikirjasta MIT Opettaja. Pyydä muistikirjalta 5 kertauskysymystä suomeksi, yksi kustakin eri luennosta. Kysymys ei saa paljastaa vastausta. Näytä minulle vain kysymykset.
+
+Kun vastaan, anna muistikirjan arvioida vastaukset lähteiden perusteella: Oikein, Osittain tai Väärin, mitä puuttui ja mistä luennosta asia löytyy. Tallenna tulos tiedostoon kertaus.md.</pre>
+
+<p>Vastaa kaikkiin kysymyksiin yhdessä viestissä. Saat vastata myös <em>en tiedä</em>.</p>
+<p>Ensimmäisellä kierroksellani tulos oli 2 / 5. <code>kertaus.md</code> näytti tältä:</p>
+<table>
+<thead>
+<tr>
+<th>Aihe</th>
+<th>Arvio</th>
+<th>Kerrattava luento</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multimodaalinen kohdistaminen</td>
+<td>Väärin</td>
+<td>Lecture 4</td>
+</tr>
+<tr>
+<td>Vahvistusoppiminen vs. ohjattu</td>
+<td>Osittain</td>
+<td>Lecture 10</td>
+</tr>
+<tr>
+<td>Miksi CNN sopii kuviin</td>
+<td>Osittain</td>
+<td>Lecture 3</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Osittain ja Väärin voivat vaihdella kierrosten välillä.</strong> Samat vastaukset saivat kolmella arviointikerralla eri arvion. Kertaa molemmat.</p>
+<p>Lue kerrattavat luennot. Aloita muutaman päivän päästä uusi kierros:</p>
+<pre>Uusi kertauskierros. Lue kertaus.md ja pyydä muistikirjalta 3 uutta kysymystä aiheista, jotka menivät väärin tai osittain. Kysy käytännön esimerkin kautta. Älä toista vanhoja kysymyksiä äläkä paljasta vastausta kysymyksessä. Lisää tulos kertaus.md:hen.</pre>
+
+<p>Claude ja muistikirja eivät muista aiempia kierroksia ilman tätä tiedostoa. Pidä <code>kertaus.md</code> samassa kansiossa ja avaa aina sama kansio.</p>
+<h2 id="jos-jokin-menee-pieleen">Jos jokin menee pieleen</h2>
+<p><strong>ChatGPT muutti sisältöä, ei vain kieltä.</strong>
+Vertaa kohtaa lähteeseen toisella kehotteella (vaihe 6). Pyydä sitten: <code>Palauta alkuperäinen merkitys. Korjaa vain kieli.</code></p>
+<p><strong>Muistikirja vastaa englanniksi.</strong>
+Tarkista, että <strong>Output language</strong> on <em>suomi</em> (vaihe 2). Varmista, että ohjeessa lukee <em>Vastaa aina suomeksi</em>.</p>
+<p><strong>Vastaukset ovat liian pitkiä.</strong>
+Lyhennä ohjeen sanamäärää, esimerkiksi <em>Enintään 80 sanaa</em>, tai valitse pituudeksi <strong>Shorter</strong>.</p>
+<p><strong>Lähde näkyy punaisena.</strong>
+Lähdettä ei voitu lukea. YouTube-videolta puuttuu usein tekstitys. Poista lähde ja lisää toinen versio tai luentokalvot.</p>
+<p><strong>Claude sanoo, että kirjautuminen on vanhentunut.</strong>
+Kirjautuminen vanhenee ajan myötä. Kirjoita päätteeseen uudelleen <code>notebooklm login</code>.</p>
+<p><strong>Claude ei löydä muistikirjaa.</strong>
+Kirjauduit todennäköisesti eri Google-tilillä. Kirjaudu uudelleen sillä tilillä, jolla muistikirja on tehty.</p>
+<p><strong>Kysymys paljastaa vastauksen.</strong>
+Lisää kehotteeseen <em>Kysymys ei saa sisältää vastausta</em>. Muistikirja tekee tämän virheen helposti, kun sitä pyydetään kysymään käytännön esimerkin kautta.</p>
+<h2 id="lahteet">Lähteet</h2>
+<ul>
+<li><a href="https://support.google.com/gemininotebook/">Gemini Notebook -ohje</a>: lähteet, kieliasetus ja keskustelun asetukset.</li>
+<li><a href="https://github.com/teng-lin/notebooklm-py">notebooklm-py</a>: komentorivityökalu, jolla Claude käyttää muistikirjaa.</li>
+<li><a href="https://www.learnwithmeai.com/p/ive-built-my-ai-tutor-with-claude">Gencay: I Built an AI Tutor with NotebookLM &amp; Claude</a>: idea kuulustelevasta opettajasta.</li>
+<li><a href="https://www.learnwithmeai.com/p/notebooklm-beginners-guide">Gencay: NotebookLM Beginner's Guide</a>: Studion tuotokset.</li>
+<li><a href="https://ocw.mit.edu/courses/mas-s60-how-to-ai-almost-anything-spring-2025/">MIT: How to AI (Almost) Anything</a>: esimerkin lähdeaineisto.</li>
+</ul>
+<p>Opettajan ohje, kertauskierrokset ja suomen arviointi kokeiltu MIT Opettaja -muistikirjalla 7.10.2026, notebooklm-py 0.8.2. Kielentarkistuksen kehotteet perustuvat ChatGPT:llä tehtyyn MIT-aineiston korjaukseen.</p>
+  </main>
+
+  <aside class="col-meta" aria-label="Sivun tiedot">
+<section><p>Julkaistu 2026-10-07</p></section>
+<section><h2>Linkit</h2><ul><li><a href="https://notebook.google.com/">Gemini Notebook</a></li><li><a href="https://github.com/teng-lin/notebooklm-py">notebooklm-py (GitHub)</a></li><li><a href="./muistipaikka.html">Muistipaikka-ohje (Claude Coden asennus)</a></li></ul></section>
+<section><figure><img src="./assets/img/opettaja-muistikirja.jpg" alt="MIT Opettaja -muistikirja, jossa on 12 luentovideota lähteinä"></figure></section>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="contact">
+    <a href="mailto:klyytine@uef.fi">klyytine@uef.fi</a>
+    <span class="sep">&middot;</span>
+    <a href="https://linkedin.com/in/kalle-lyytinen-prof2526" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="legal">
+<a href="./privacy.html">Tietosuoja</a>
+    <span class="updated">Paivitetty 2026-10-07</span>
+  </div>
+</footer>
+
+</body>
+</html>

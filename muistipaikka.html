@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="fi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muistipaikka - itse tehty muistiinpanoäppi | Kalle Lyytinen, dipl.ins.</title>
+<meta name="description" content="Tee oma suomenkielinen Notion-klooni. Vaiheet ja kopioitavat kehotteet.">
+<link rel="stylesheet" href="assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="lang" aria-label="Language">
+    <a href="./muistipaikka.html" class="active" hreflang="fi">FIN</a>
+    <span class="sep">/</span>
+    <a href="./en/muistipaikka.html" class="" hreflang="en">ENG</a>
+  </nav>
+  <div class="identity">
+    <a href="./index.html" class="name">Kalle Lyytinen, dipl.ins.</a>
+    <span class="tagline">Innovaatiojohtaminen ja datatekniikka, Itä-Suomen yliopisto</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="col-nav" aria-label="Sivuston osat">
+    <details class="mobile-menu" id="menu" open>
+      <summary>Valikko</summary>
+      <nav class="tree">
+<ul><li><a href="./index.html">Etusivu</a></li><li><a href="./cv.html">CV</a></li><li><a href="./projects.html">Projektit</a><ul class="children"><li><a href="./lumet.html">LUMET 2026</a></li><li><a href="./opiskeluaineisto-suomeksi.html">Oma opettaja</a></li><li><a href="./muistipaikka.html" class="current">Muistipaikka</a></li></ul></li><li><a href="./about.html">Minusta</a></li></ul>
+      </nav>
+    </details>
+  </aside>
+
+  <main class="col-main">
+<h1 id="ensimmainen-agentti-oman-apin-teko-claude-coden-avulla">Ensimmäinen agentti - oman äpin teko Claude Coden avulla</h1>
+<p>Netti on täynnä menestystarinoita, miten vibe-koodauksella on noustu ryysyistä rikkauksiin. Vibe-koodauksessa kielimallille kerrotaan omin sanoin, mistä on kyse ja mitä halutaan tehdä. Toisin sanoen laaditaan prompt eli komentokehote. Tekoäly rakentaa äpin eli sovelluksen. Se laatii tiedostorakenteen, tekee tiedostot, kirjoittaa koodin ja kehittää käyttöliittymän, kuvat ja äänet.<br />
+Hyvät puolet: kuka tahansa voi olla sovelluskehittäjä, prototyypit valmistuvat testattavaksi tunneissa ja omien työkalujen kehittäminen maksaa murto-osan siitä mitä aiemmin.
+Riskit: tekoälyn koodissa voi olla tietoturva-aukkoja, jos sitä ei valvota ja koodia tarkasteta. Koodi muuttuu spagetiksi, kun sovellus kasvaa suureksi. Ja kun (ei jos) äppiin tulee bugi eli virhe, sen korjaaminen voi olla vaikeaa ilman ohjelmointitaitoa.</p>
+<p><strong>Näytän seuraavaksi, miten teet oman sovelluksen kuten Notion. Tein sen tunnissa.</strong> Tarkoitus tällä on demota, miten vibe-koodaus sopii nopeaan kehitykseen. Toisaalta omien pienien apuäppien ja skriptien, kuten sähköpostin organisoijan, teko ja käyttö poistaa riippuvuuden teknojättien alustoista tai maksullisista palveluista.</p>
+<p>Minun tietokoneen ympäristö:</p>
+<ul>
+<li>Windows 11 käyttöjärjestelmää (eng)</li>
+<li>Claude Code</li>
+<li>Visual Studio Code</li>
+</ul>
+<p><img alt="Valmis Muistipaikka-sovellus: vasemmalla sivupalkki, oikealla Aloitusopas-sivu, jossa on tehtävälista ja Markdown-pikanäppäimiä." src="./assets/img/muistipaikka-aloitus.png" /></p>
+<p><em>Tältä valmis sovellus näyttää. Sivut, kuvakkeet, kansikuvat, tehtävälistat, Tiedosto-valikko ja tumma tila kuuluvat mukaan.</em></p>
+<h2 id="mita-tarvitset">Mitä tarvitset</h2>
+<ul>
+<li>Tietokoneen: Windows 10 tai 11, tai macOS 13 tai uudempi, ja vähintään 4 Gt muistia.</li>
+<li><strong>Maksullisen Claude-tilauksen</strong> (Pro, Max, Team tai Enterprise). Ilmaistili ei riitä.</li>
+<li>Internetyhteyden ja noin tunnin aikaa.</li>
+</ul>
+<p>Et tarvitse ohjelmointikokemusta, Gitiä, GitHub-tiliä, komentorivin osaamista, API-avainta tai palvelinta. Kaikki toimii omalla koneellasi.</p>
+<h2 id="asennus-ja-tyojarjestys">Asennus- ja työjärjestys</h2>
+<ol>
+<li><strong>Asenna VS Code.</strong> Koodieditori, jossa työ tehdään.</li>
+<li><strong>Asenna Node.js.</strong> Ohjelma, jolla sovellus pyörii.</li>
+<li><strong>Asenna Claude Code.</strong> Tekoälyavustaja VS Coden laajennuksena.</li>
+<li><strong>Kirjaudu Claudeen.</strong> Yhdistä laajennus Claude-tiliisi.</li>
+<li><strong>Tee kansio.</strong> Sovelluksen tiedostot tulevat yhteen kansioon.</li>
+<li><strong>Tallenna rakennusohje.</strong> PROMPT.md kertoo tekoälylle, mitä tehdään.</li>
+<li><strong>Pyydä Claudea rakentamaan.</strong> Tekoäly kirjoittaa koodin.</li>
+<li><strong>Avaa ja kokeile.</strong> Muistipaikka aukeaa selaimessa.</li>
+</ol>
+<h2 id="1-asenna-visual-studio-code">1. Asenna Visual Studio Code</h2>
+<p>VS Code on ilmainen koodieditori. Siinä näet tiedostot, joita tekoäly kirjoittaa, ja siinä keskustelet tekoälyn kanssa.</p>
+<ol>
+<li>Mene osoitteeseen <a href="https://code.visualstudio.com/">code.visualstudio.com</a> ja lataa oman käyttöjärjestelmäsi versio.</li>
+<li>Asenna ohjelma oletusasetuksilla. Windowsissa jätä rasti kohtaan <em>Add to PATH</em>.</li>
+<li>Avaa VS Code. Ensimmäisen käynnistyksen esittelyikkunat voit sulkea.</li>
+</ol>
+<h2 id="2-asenna-nodejs">2. Asenna Node.js</h2>
+<p>Muistipaikka on verkkosovellus, joka pyörii omalla koneellasi Node.js-ohjelman avulla. Ilman sitä sovellus ei käynnisty.</p>
+<ol>
+<li>Mene osoitteeseen <a href="https://nodejs.org/">nodejs.org</a> ja lataa <strong>LTS</strong>-versio (pitkäaikaisesti tuettu versio).</li>
+<li>Asenna oletusasetuksilla. Windowsin asennuksen kohtaa <em>Automatically install the necessary tools</em> ei tarvitse valita.</li>
+<li><strong>Sulje VS Code ja avaa se uudelleen</strong>, jotta se löytää juuri asennetun Node.js:n.</li>
+</ol>
+<h2 id="3-asenna-claude-code-vs-codeen">3. Asenna Claude Code VS Codeen</h2>
+<p>Claude Code on tekoälyavustaja, joka osaa luoda tiedostoja, ajaa komentoja ja korjata virheitä. Se asennetaan VS Codeen laajennuksena.</p>
+<ol>
+<li>Avaa VS Coden laajennukset: paina <strong>Ctrl + Shift + X</strong> (Macissa <strong>⌘ + Shift + X</strong>).</li>
+<li>Kirjoita hakuun <strong>Claude Code</strong>.</li>
+<li>Valitse laajennus, jonka julkaisija on <strong>Anthropic</strong>, ja paina <strong>Install</strong>.</li>
+</ol>
+<p><strong>Tarkista julkaisija.</strong> Asenna vain Anthropicin julkaisema laajennus. Samannimisiä laajennuksia voi olla muitakin.</p>
+<h2 id="4-kirjaudu-claudeen">4. Kirjaudu Claudeen</h2>
+<ol>
+<li>Napsauta VS Coden vasemmasta reunasta <strong>Claude Coden kuvaketta</strong> (oranssi tähtimäinen kuvake). Claude-paneeli avautuu.</li>
+<li>Paina <strong>Sign in</strong>. Selain avautuu.</li>
+<li>Kirjaudu Claude-tililläsi ja hyväksy yhteys. Palaa sitten VS Codeen.</li>
+</ol>
+<p>Kirjautumisen jälkeen paneeliin voi ilmestyä <em>Learn Claude Code</em> -tarkistuslista. Voit käydä sen läpi tai sulkea sen rististä.</p>
+<h2 id="5-tee-sovellukselle-kansio">5. Tee sovellukselle kansio</h2>
+<p>Claude tallentaa kaikki sovelluksen tiedostot yhteen kansioon. Tee sille uusi, tyhjä kansio.</p>
+<ol>
+<li>Tee esimerkiksi Tiedostot-kansioon uusi kansio nimeltä <code>muistipaikka</code>.</li>
+<li>Valitse VS Codessa <strong>File → Open Folder…</strong> ja avaa juuri tekemäsi kansio.</li>
+<li>Jos VS Code kysyy <em>Do you trust the authors of the files in this folder?</em>, vastaa <strong>Yes, I trust the authors</strong>. Kansio on oma ja tyhjä.</li>
+</ol>
+<h2 id="6-tallenna-rakennusohje-kansioon">6. Tallenna rakennusohje kansioon</h2>
+<p>Rakennusohje eli <strong>kehote</strong> kertoo tekoälylle tarkasti, millainen sovelluksesta tehdään: kaikki ominaisuudet, ulkoasu ja suomenkieliset termit. Se on englanniksi, koska tekoäly lukee sen. Sovelluksesta tulee silti suomenkielinen.</p>
+<ol>
+<li>Lataa kehote: <a download="PROMPT.md" href="./assets/files/muistipaikka-PROMPT.md">PROMPT.md</a>. Jos selain avaa tiedoston tekstinä, tallenna se nimellä <code>PROMPT.md</code> (<strong>Ctrl + S</strong>, Macissa <strong>⌘ + S</strong>).</li>
+<li>Siirrä <code>PROMPT.md</code> vaiheessa 5 tekemääsi kansioon.</li>
+<li>Tarkista, että tiedosto näkyy VS Coden vasemmassa reunassa kansion sisällä.</li>
+</ol>
+<p>Kehotteen uusin versio on myös GitHubissa: <a href="https://github.com/klyytine/notion-clone/blob/main/PROMPT.md">github.com/klyytine/notion-clone</a>. Siellä <em>Download raw file</em> -painike lataa sen valmiina tiedostona.</p>
+<h2 id="7-pyyda-claudea-rakentamaan-sovellus">7. Pyydä Claudea rakentamaan sovellus</h2>
+<p>Nyt tekoäly tekee varsinaisen työn. Kopioi alla oleva viesti Claude-paneelin tekstikenttään ja paina <strong>Enter</strong>.</p>
+<h3 id="windows">Windows</h3>
+<pre>Lue tiedosto PROMPT.md ja rakenna sen kuvaama Muistipaikka-sovellus tähän kansioon. Etene vaihe kerrallaan ja tarkista lopuksi, että sovellus käynnistyy ilman virheitä. Kun olet valmis, käynnistä sovellus ja kerro minulle, mistä osoitteesta avaan sen selaimessa.</pre>
+
+<h3 id="mac">Mac</h3>
+<pre>Lue tiedosto PROMPT.md ja rakenna sen kuvaama Muistipaikka-sovellus tähän kansioon. Käytän Macia, joten jätä Windows-käynnistin (kohta 12) pois. Etene vaihe kerrallaan ja tarkista lopuksi, että sovellus käynnistyy ilman virheitä. Kun olet valmis, käynnistä sovellus ja kerro minulle, mistä osoitteesta avaan sen selaimessa.</pre>
+
+<p><strong>Mitä seuraavaksi tapahtuu:</strong> Claude lukee ohjeen, suunnittelee työn ja alkaa luoda tiedostoja. Näet ne VS Coden vasemmassa reunassa sitä mukaa kuin niitä syntyy. Työ kestää tavallisesti kymmeniä minuutteja.</p>
+<ul>
+<li><strong>Claude kysyy lupaa</strong> ennen tiettyjä toimia, esimerkiksi komentoa <code>npm install</code>, joka lataa sovelluksen tarvitsemat osat. Lue kysymys ja hyväksy, kun se liittyy tähän projektiin.</li>
+<li><strong>Älä sulje VS Codea</strong> kesken työn. Voit tehdä muuta sillä aikaa.</li>
+<li><strong>Jos työ pysähtyy</strong> käyttörajaan tai keskeytyy, kirjoita myöhemmin <code>jatka</code>. Claude jatkaa siitä, mihin jäi.</li>
+</ul>
+<p><strong>Haluatko nähdä suunnitelman ensin?</strong> Vaihda tekstikentän alareunasta tilaksi <strong>Plan</strong> ennen viestin lähettämistä. Claude kertoo ensin, mitä aikoo tehdä, ja aloittaa vasta, kun hyväksyt suunnitelman.</p>
+<h2 id="8-avaa-ja-kokeile-muistipaikkaa">8. Avaa ja kokeile Muistipaikkaa</h2>
+<p>Kun Claude kertoo olevansa valmis, se on käynnistänyt sovelluksen. Avaa selaimessa osoite, jonka Claude antaa. Yleensä se on <a href="http://localhost:5173">http://localhost:5173</a>.</p>
+<p><em>localhost</em> tarkoittaa omaa konettasi. Sovellus ei ole internetissä, eikä kukaan muu näe sitä. Muistiinpanosi tallentuvat selaimeesi.</p>
+<p>Kokeile näitä:</p>
+<table>
+<thead>
+<tr>
+<th>Kokeile</th>
+<th>Näin</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Uusi sivu</td>
+<td>Paina sivupalkista <strong>+ Uusi sivu</strong> ja kirjoita otsikko.</td>
+</tr>
+<tr>
+<td>Komentovalikko</td>
+<td>Kirjoita tyhjälle riville <code>/</code> ja valitse esimerkiksi Tehtävälista.</td>
+</tr>
+<tr>
+<td>Kuvake ja kansikuva</td>
+<td>Vie hiiri otsikon yläpuolelle ja valitse <strong>Lisää kuvake</strong> tai <strong>Lisää kansi</strong>.</td>
+</tr>
+<tr>
+<td>Tiedosto-valikko</td>
+<td>Tallenna sivu tiedostoksi: <strong>Tiedosto → Tallenna nimellä</strong>.</td>
+</tr>
+<tr>
+<td>Kieli</td>
+<td><strong>Asetukset → Kieli</strong> vaihtaa suomen ja englannin välillä.</td>
+</tr>
+<tr>
+<td>Tumma tila</td>
+<td>Paina <strong>Ctrl + Shift + L</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="kun-haluat-kayttaa-sovellusta-myohemmin">Kun haluat käyttää sovellusta myöhemmin</h2>
+<p>Sovellus pysyy käynnissä niin kauan kuin VS Code on auki. Myöhemmin saat sen auki näin:</p>
+<ul>
+<li><strong>Windows:</strong> kaksoisnapsauta kansiosta tiedostoa <code>run.bat</code>. Sovellus aukeaa omaan ikkunaansa. Kun suoritat kerran <code>create-shortcut.bat</code>, saat Muistipaikka-kuvakkeen työpöydälle.</li>
+<li><strong>Mac ja Windows:</strong> avaa kansio VS Codessa ja kirjoita Claudelle <code>käynnistä sovellus</code>. Avaa sitten <a href="http://localhost:5173">http://localhost:5173</a>.</li>
+</ul>
+<h2 id="jos-jokin-menee-pieleen">Jos jokin menee pieleen</h2>
+<p>Paras keino on lähes aina sama: <strong>kopioi virheilmoitus Claudelle</strong> ja pyydä korjaamaan. Se osaa lukea virheet ja korjata koodin itse.</p>
+<p><strong>”npm” tai ”node” ei ole tunnettu komento.</strong>
+Node.js puuttuu, tai VS Code avattiin ennen sen asennusta. Asenna Node.js (vaihe 2) ja käynnistä VS Code uudelleen.</p>
+<p><strong>Selaimessa näkyy tyhjä sivu.</strong>
+Kirjoita Claudelle: <code>Sovellus näyttää tyhjää sivua osoitteessa localhost:5173. Etsi ja korjaa vika.</code></p>
+<p><strong>”Port 5173 is already in use”.</strong>
+Sovellus on jo käynnissä toisessa ikkunassa, tai portti on toisen ohjelman käytössä. Sulje ylimääräiset VS Code -ikkunat tai pyydä Claudea käynnistämään sovellus toiseen porttiin.</p>
+<p><strong>Claude ilmoittaa käyttörajasta.</strong>
+Tilauksesi käyttöraja tuli täyteen. Odota ilmoitettu aika ja kirjoita <code>jatka</code>. Työ ei katoa.</p>
+<p><strong>Jokin ominaisuus puuttuu tai toimii eri tavalla.</strong>
+Tekoäly ei tee joka kerta täsmälleen samaa. Kerro Claudelle, mitä odotit, esimerkiksi: <code>Asetuksista puuttuu kielen valinta. Lisää se PROMPT.md:n kohdan 13 mukaan.</code></p>
+<h2 id="tee-siita-omasi">Tee siitä omasi</h2>
+<p>Nyt sinulla on toimiva sovellus ja tekoälyavustaja, joka tuntee sen koodin. Kokeile pyytää muutoksia omin sanoin, esimerkiksi:</p>
+<ul>
+<li><code>Lisää lohkotyyppi, jossa on avattava lista.</code></li>
+<li><code>Vaihda sovelluksen korostusväri vihreäksi.</code></li>
+<li><code>Lisää sivupalkkiin hakukenttä, joka etsii sivujen otsikoista.</code></li>
+</ul>
+<p>Pyydä yksi muutos kerrallaan ja kokeile sitä ennen seuraavaa. Jos muutos ei miellytä, pyydä Claudea perumaan se.</p>
+<h2 id="lahteet">Lähteet</h2>
+<ul>
+<li><a href="https://github.com/klyytine/notion-clone">Muistipaikan lähdekoodi ja kehote</a>, MIT-lisenssi.</li>
+<li><a href="https://code.claude.com/docs/en/vs-code">Claude Code VS Codessa</a>: virallinen asennus- ja käyttöohje.</li>
+<li><a href="https://www.learnwithmeai.com/p/claude-code-masterclass-for-everyone">Claude Code MasterClass For Everyone</a>: esikuva oppaan rakenteelle.</li>
+<li><a href="https://www.notion.com/fi/help">Notionin suomenkielinen ohje</a>: sovelluksen suomenkieliset termit.</li>
+</ul>
+<p>Asennusohjeet ja vaatimukset tarkistettu Claude Coden virallisesta ohjeesta 7.10.2026.</p>
+  </main>
+
+  <aside class="col-meta" aria-label="Sivun tiedot">
+<section><p>Julkaistu 2026-10-07</p></section>
+<section><h2>Lataukset</h2><ul><li><a href="./assets/files/muistipaikka-PROMPT.md">Rakennusohje PROMPT.md</a></li></ul></section>
+<section><h2>Linkit</h2><ul><li><a href="https://github.com/klyytine/notion-clone">Muistipaikan lähdekoodi (GitHub)</a></li><li><a href="https://code.claude.com/docs/en/vs-code">Claude Code VS Codessa (virallinen ohje)</a></li></ul></section>
+<section><figure><img src="./assets/img/muistipaikka-ikoni.png" alt="Muistipaikan kuvake, musta laatta ja valkoinen M-kirjain"></figure></section>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="contact">
+    <a href="mailto:klyytine@uef.fi">klyytine@uef.fi</a>
+    <span class="sep">&middot;</span>
+    <a href="https://linkedin.com/in/kalle-lyytinen-prof2526" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="legal">
+<a href="./privacy.html">Tietosuoja</a>
+    <span class="updated">Paivitetty 2026-10-07</span>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muistipaikka - a home-made note-taking app | Kalle Lyytinen, M.Sc. (Tech.)</title>
+<meta name="description" content="Build your own Notion-style note app with Claude Code. Steps and copyable prompts.">
+<link rel="stylesheet" href="../assets/css/site.css">
+</head>
+<body>
+
+<header class="site-header">
+  <nav class="lang" aria-label="Language">
+    <a href="../muistipaikka.html" class="" hreflang="fi">FIN</a>
+    <span class="sep">/</span>
+    <a href="../en/muistipaikka.html" class="active" hreflang="en">ENG</a>
+  </nav>
+  <div class="identity">
+    <a href="../en/index.html" class="name">Kalle Lyytinen, M.Sc. (Tech.)</a>
+    <span class="tagline">Innovation Management and Data Engineering, University of Eastern Finland</span>
+  </div>
+</header>
+
+<div class="layout">
+
+  <aside class="col-nav" aria-label="Site sections">
+    <details class="mobile-menu" id="menu" open>
+      <summary>Menu</summary>
+      <nav class="tree">
+<ul><li><a href="../en/index.html">Home</a></li><li><a href="../en/cv.html">CV</a></li><li><a href="../en/projects.html">Projects</a><ul class="children"><li><a href="../en/lumet.html">LUMET 2026</a></li><li><a href="../en/opiskeluaineisto-suomeksi.html">Your own tutor</a></li><li><a href="../en/muistipaikka.html" class="current">Muistipaikka</a></li></ul></li><li><a href="../en/about.html">About me</a></li></ul>
+      </nav>
+    </details>
+  </aside>
+
+  <main class="col-main">
+<h1 id="first-agent-building-your-own-app-with-claude-code">First agent - building your own app with Claude Code</h1>
+<p>The internet is full of success stories about going from rags to riches with vibe coding. In vibe coding, you tell a language model in your own words what the idea is and what you want to build. In other words, you write a prompt. The AI builds the app: it lays out the file structure, creates the files, writes the code and develops the user interface, images and sounds.
+The upside: anyone can be an app developer, prototypes are ready to test in hours, and building your own tools costs a fraction of what it used to.
+The risks: AI-written code can have security holes if nobody supervises it and reviews the code. The code turns into spaghetti as the app grows. And when (not if) the app gets a bug, fixing it can be hard without programming skills.</p>
+<p><strong>Next I'll show you how to build your own app like Notion. I built mine in an hour.</strong> The point is to demonstrate how well vibe coding suits fast development. On the other hand, building and using your own small helper apps and scripts, such as an email organizer, removes your dependence on big-tech platforms and paid services.</p>
+<p>My computer setup:</p>
+<ul>
+<li>Windows 11 (English)</li>
+<li>Claude Code</li>
+<li>Visual Studio Code</li>
+</ul>
+<p><img alt="The finished Muistipaikka app: a sidebar on the left and the Aloitusopas (Getting started) page on the right, with a to-do list and Markdown shortcuts." src="../assets/img/muistipaikka-aloitus.png" /></p>
+<p><em>This is what the finished app looks like. Pages, icons, cover images, to-do lists, a File menu and dark mode are all included. Muistipaikka means "a place for notes" in Finnish. The app opens in Finnish and switches to English under Asetukset → Kieli (Preferences → Language).</em></p>
+<h2 id="what-you-need">What you need</h2>
+<ul>
+<li>A computer: Windows 10 or 11, or macOS 13 or later, with at least 4 GB of memory.</li>
+<li><strong>A paid Claude subscription</strong> (Pro, Max, Team or Enterprise). A free account isn't enough.</li>
+<li>An internet connection and about an hour.</li>
+</ul>
+<p>You don't need programming experience, Git, a GitHub account, command-line skills, an API key or a server. Everything runs on your own computer.</p>
+<h2 id="the-workflow-at-a-glance">The workflow at a glance</h2>
+<ol>
+<li><strong>Install VS Code.</strong> The code editor where the work happens.</li>
+<li><strong>Install Node.js.</strong> The program the app runs on.</li>
+<li><strong>Install Claude Code.</strong> The AI assistant, as a VS Code extension.</li>
+<li><strong>Sign in to Claude.</strong> Connect the extension to your Claude account.</li>
+<li><strong>Make a folder.</strong> All the app's files go in one folder.</li>
+<li><strong>Save the build instructions.</strong> PROMPT.md tells the AI what to build.</li>
+<li><strong>Ask Claude to build it.</strong> The AI writes the code.</li>
+<li><strong>Open and try it.</strong> Muistipaikka opens in your browser.</li>
+</ol>
+<h2 id="1-install-visual-studio-code">1. Install Visual Studio Code</h2>
+<p>VS Code is a free code editor. It's where you see the files the AI writes and where you talk to the AI.</p>
+<ol>
+<li>Go to <a href="https://code.visualstudio.com/">code.visualstudio.com</a> and download the version for your operating system.</li>
+<li>Install it with the default settings. On Windows, leave <em>Add to PATH</em> ticked.</li>
+<li>Open VS Code. You can close the welcome screens.</li>
+</ol>
+<h2 id="2-install-nodejs">2. Install Node.js</h2>
+<p>Muistipaikka is a web app that runs on your own computer with Node.js. Without it, the app won't start.</p>
+<ol>
+<li>Go to <a href="https://nodejs.org/">nodejs.org</a> and download the <strong>LTS</strong> version (long-term support).</li>
+<li>Install it with the default settings. On Windows you don't need to tick <em>Automatically install the necessary tools</em>.</li>
+<li><strong>Close VS Code and open it again</strong>, so it finds the Node.js you just installed.</li>
+</ol>
+<h2 id="3-install-claude-code-in-vs-code">3. Install Claude Code in VS Code</h2>
+<p>Claude Code is an AI assistant that can create files, run commands and fix errors. It's installed as a VS Code extension.</p>
+<ol>
+<li>Open the VS Code extensions view: press <strong>Ctrl + Shift + X</strong> (on a Mac, <strong>⌘ + Shift + X</strong>).</li>
+<li>Search for <strong>Claude Code</strong>.</li>
+<li>Pick the extension published by <strong>Anthropic</strong> and click <strong>Install</strong>.</li>
+</ol>
+<p><strong>Check the publisher.</strong> Install only the extension published by Anthropic. Other extensions may use a similar name.</p>
+<h2 id="4-sign-in-to-claude">4. Sign in to Claude</h2>
+<ol>
+<li>Click the <strong>Claude Code icon</strong> (an orange, star-like icon) on the left edge of VS Code. The Claude panel opens.</li>
+<li>Click <strong>Sign in</strong>. Your browser opens.</li>
+<li>Sign in with your Claude account and approve the connection. Then go back to VS Code.</li>
+</ol>
+<p>After you sign in, a <em>Learn Claude Code</em> checklist may appear in the panel. You can work through it or close it with the X.</p>
+<h2 id="5-make-a-folder-for-the-app">5. Make a folder for the app</h2>
+<p>Claude saves all of the app's files in one folder. Make a new, empty folder for it.</p>
+<ol>
+<li>Create a new folder called <code>muistipaikka</code>, for example in your Documents folder.</li>
+<li>In VS Code, choose <strong>File → Open Folder…</strong> and open the folder you just made.</li>
+<li>If VS Code asks <em>Do you trust the authors of the files in this folder?</em>, answer <strong>Yes, I trust the authors</strong>. The folder is yours and empty.</li>
+</ol>
+<h2 id="6-save-the-build-instructions-in-the-folder">6. Save the build instructions in the folder</h2>
+<p>The build instructions, or <strong>prompt</strong>, tell the AI exactly what to build: every feature, the look, and the Finnish terms. The prompt is in English; the app it describes is Finnish by default, with English as a second language.</p>
+<ol>
+<li>Download the prompt: <a download="PROMPT.md" href="../assets/files/muistipaikka-PROMPT.md">PROMPT.md</a>. If your browser opens it as text instead, save it as <code>PROMPT.md</code> (<strong>Ctrl + S</strong>, on a Mac <strong>⌘ + S</strong>).</li>
+<li>Move <code>PROMPT.md</code> into the folder you made in step 5.</li>
+<li>Check that the file shows up inside the folder on the left side of VS Code.</li>
+</ol>
+<p>The latest version of the prompt is also on GitHub: <a href="https://github.com/klyytine/notion-clone/blob/main/PROMPT.md">github.com/klyytine/notion-clone</a>. Its <em>Download raw file</em> button downloads it as a ready-made file.</p>
+<h2 id="7-ask-claude-to-build-the-app">7. Ask Claude to build the app</h2>
+<p>Now the AI does the real work. Copy the message below into the text box of the Claude panel and press <strong>Enter</strong>.</p>
+<h3 id="windows">Windows</h3>
+<pre>Read PROMPT.md and build the Muistipaikka app it describes in this folder. Work step by step, and at the end check that the app starts without errors. When you're done, start the app and tell me which address to open in my browser.</pre>
+
+<h3 id="mac">Mac</h3>
+<pre>Read PROMPT.md and build the Muistipaikka app it describes in this folder. I'm on a Mac, so leave out the Windows launcher (section 12). Work step by step, and at the end check that the app starts without errors. When you're done, start the app and tell me which address to open in my browser.</pre>
+
+<p><strong>What happens next:</strong> Claude reads the instructions, plans the work and starts creating files. You'll see them appear on the left side of VS Code. The work usually takes tens of minutes.</p>
+<ul>
+<li><strong>Claude asks for permission</strong> before some actions, such as the <code>npm install</code> command, which downloads the parts the app needs. Read the request and approve it when it's about this project.</li>
+<li><strong>Don't close VS Code</strong> while it works. You can do something else in the meantime.</li>
+<li><strong>If the work stops</strong> at a usage limit or gets interrupted, type <code>continue</code> later. Claude picks up where it left off.</li>
+</ul>
+<p><strong>Want to see the plan first?</strong> Switch the mode at the bottom of the text box to <strong>Plan</strong> before sending the message. Claude first explains what it will do and starts only after you approve the plan.</p>
+<h2 id="8-open-and-try-muistipaikka">8. Open and try Muistipaikka</h2>
+<p>When Claude says it's done, it has started the app. Open the address Claude gives you in your browser. It's usually <a href="http://localhost:5173">http://localhost:5173</a>.</p>
+<p><em>localhost</em> means your own computer. The app isn't on the internet, and nobody else can see it. Your notes are saved in your browser.</p>
+<p>The app opens in Finnish. To switch to English, open <strong>Asetukset</strong> (Preferences) in the sidebar and choose <strong>English</strong> under <strong>Kieli</strong> (Language).</p>
+<p>Try these:</p>
+<table>
+<thead>
+<tr>
+<th>Try</th>
+<th>How</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>New page</td>
+<td>Click <strong>+ Uusi sivu</strong> (+ New Page) in the sidebar and type a title.</td>
+</tr>
+<tr>
+<td>Command menu</td>
+<td>Type <code>/</code> on an empty line and pick, for example, a to-do list.</td>
+</tr>
+<tr>
+<td>Icon and cover</td>
+<td>Hover above the title and choose <strong>Lisää kuvake</strong> (Add icon) or <strong>Lisää kansi</strong> (Add cover).</td>
+</tr>
+<tr>
+<td>File menu</td>
+<td>Save the page as a file: <strong>Tiedosto → Tallenna nimellä</strong> (File → Save As).</td>
+</tr>
+<tr>
+<td>Language</td>
+<td><strong>Asetukset → Kieli</strong> (Preferences → Language) switches between Finnish and English.</td>
+</tr>
+<tr>
+<td>Dark mode</td>
+<td>Press <strong>Ctrl + Shift + L</strong>.</td>
+</tr>
+</tbody>
+</table>
+<h2 id="using-the-app-later">Using the app later</h2>
+<p>The app keeps running as long as VS Code is open. Later, you can open it like this:</p>
+<ul>
+<li><strong>Windows:</strong> double-click <code>run.bat</code> in the folder. The app opens in its own window. If you run <code>create-shortcut.bat</code> once, you get a Muistipaikka icon on your desktop.</li>
+<li><strong>Mac and Windows:</strong> open the folder in VS Code and type <code>start the app</code> to Claude. Then open <a href="http://localhost:5173">http://localhost:5173</a>.</li>
+</ul>
+<h2 id="if-something-goes-wrong">If something goes wrong</h2>
+<p>The best fix is almost always the same: <strong>copy the error message to Claude</strong> and ask it to fix the problem. It can read errors and fix the code itself.</p>
+<p><strong>"npm" or "node" is not recognized.</strong>
+Node.js is missing, or VS Code was opened before you installed it. Install Node.js (step 2) and restart VS Code.</p>
+<p><strong>The browser shows a blank page.</strong>
+Tell Claude: <code>The app shows a blank page at localhost:5173. Find and fix the problem.</code></p>
+<p><strong>"Port 5173 is already in use".</strong>
+The app is already running in another window, or another program is using the port. Close any extra VS Code windows, or ask Claude to start the app on a different port.</p>
+<p><strong>Claude reports a usage limit.</strong>
+Your subscription's usage limit was reached. Wait the time it shows and type <code>continue</code>. Nothing is lost.</p>
+<p><strong>A feature is missing or works differently.</strong>
+The AI doesn't build exactly the same thing every time. Tell Claude what you expected, for example: <code>The preferences have no language setting. Add it as described in section 13 of PROMPT.md.</code></p>
+<h2 id="make-it-your-own">Make it your own</h2>
+<p>You now have a working app and an AI assistant that knows its code. Try asking for changes in your own words, for example:</p>
+<ul>
+<li><code>Add a block type with a collapsible list.</code></li>
+<li><code>Change the app's accent color to green.</code></li>
+<li><code>Add a search box to the sidebar that searches page titles.</code></li>
+</ul>
+<p>Ask for one change at a time and try it before the next one. If you don't like a change, ask Claude to undo it.</p>
+<h2 id="sources">Sources</h2>
+<ul>
+<li><a href="https://github.com/klyytine/notion-clone">Muistipaikka source code and prompt</a>, MIT license.</li>
+<li><a href="https://code.claude.com/docs/en/vs-code">Claude Code in VS Code</a>: the official installation and usage guide.</li>
+<li><a href="https://www.learnwithmeai.com/p/claude-code-masterclass-for-everyone">Claude Code MasterClass For Everyone</a>: the model for this guide's structure.</li>
+<li><a href="https://www.notion.com/fi/help">Notion Help Center in Finnish</a>: the app's Finnish terminology.</li>
+</ul>
+<p>Installation steps and requirements checked against the official Claude Code documentation on 7 October 2026.</p>
+  </main>
+
+  <aside class="col-meta" aria-label="Page details">
+<section><p>Published 2026-10-07</p></section>
+<section><h2>Downloads</h2><ul><li><a href="../assets/files/muistipaikka-PROMPT.md">Build instructions PROMPT.md</a></li></ul></section>
+<section><h2>Links</h2><ul><li><a href="https://github.com/klyytine/notion-clone">Muistipaikka source code (GitHub)</a></li><li><a href="https://code.claude.com/docs/en/vs-code">Claude Code in VS Code (official guide)</a></li></ul></section>
+<section><figure><img src="../assets/img/muistipaikka-ikoni.png" alt="Muistipaikka app icon, a black tile with a white letter M"></figure></section>
+  </aside>
+
+</div>
+
+<footer class="site-footer">
+  <div class="contact">
+    <a href="mailto:klyytine@uef.fi">klyytine@uef.fi</a>
+    <span class="sep">&middot;</span>
+    <a href="https://linkedin.com/in/kalle-lyytinen-prof2526" rel="me noopener">LinkedIn</a>
+  </div>
+  <div class="legal">
+<a href="../en/privacy.html">Privacy</a>
+    <span class="updated">Updated 2026-10-07</span>
+  </div>
+</footer>
+
+</body>
+</html>
