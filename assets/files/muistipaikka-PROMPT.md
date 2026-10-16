@@ -6,9 +6,11 @@ You are a senior frontend engineer who specializes in rich text editors, desktop
 Build "Muistipaikka" (Finnish for "a place for notes"): a Notion-style note-taking app with block-based editing, a clean minimal UI, and a desktop-app feel. The interface is in Finnish by default, with English as a second language (section 13). It runs locally in the browser. A small local file service (built into the dev server) lets it open and save real files on disk, keep the whole workspace in a folder, and behave like a native app with a File menu.
 
 Everything below is the full specification. You don't need any other material. For reference on Notion's behavior and look, you may read:
+
 - Notion Help Center: https://www.notion.com/help
 - Notion overview: https://en.wikipedia.org/wiki/Notion_(productivity_software)
-</context>
+  
+  </context>
 
 <tech-stack>
 - Frontend: React 18 + Vite
@@ -26,6 +28,7 @@ Everything below is the full specification. You don't need any other material. F
 <features>
 
 ## 1. Block editor
+
 - Block types: Text, Heading 1/2/3, Bulleted list, Numbered list, To-do (checkbox), Quote, Callout (with an emoji), Code, Divider, Image.
 - Lists and to-dos can be indented up to 3 levels with Tab / Shift+Tab.
 - Inline marks: bold, italic, underline, strikethrough, inline code.
@@ -37,9 +40,11 @@ Everything below is the full specification. You don't need any other material. F
 - Undo and redo work for every edit.
 
 ## 2. Page header (Notion style)
+
 - Inline-editable page title.
 - Icon picker: 30 emojis in an 8-column grid, opened as an absolutely positioned dropdown; click outside to close. Click an existing icon to change it. Icon size 78px, with a background highlight on hover.
 - Cover image, added two ways side by side:
+  
   ```
   [Upload Image]
        OR
@@ -50,7 +55,9 @@ Everything below is the full specification. You don't need any other material. F
 - "Change cover" and "Remove cover" buttons appear when hovering the cover.
 
 ## 3. Top bar
+
 From left to right:
+
 - Sidebar toggle button.
 - **File** menu button (see section 5).
 - Breadcrumb: page icon and title. If the page is linked to a file on disk, a chip shows the file name, with a ● dot when the file has unsaved changes. Hovering the chip shows the full path.
@@ -59,6 +66,7 @@ From left to right:
 - Dark/light mode toggle.
 
 ## 4. Sidebar
+
 - Page list with icon and title, active page highlighted.
 - "+ New Page" button.
 - Delete a page from its row, with a confirmation dialog.
@@ -66,21 +74,23 @@ From left to right:
 - Collapsible with Ctrl/⌘+\\. On narrow screens it slides over the page with a backdrop.
 
 ## 5. File menu
+
 A desktop-style dropdown menu. It works with the keyboard: focus moves to the first item when it opens, ↑ ↓ move between items, → opens the Open Recent submenu, ← closes it, Tab or a click outside closes the menu. Each item shows its shortcut on the right.
 
-| Item | Shortcut | Behavior |
-| --- | --- | --- |
-| Open File… | Ctrl/⌘+O | Opens the in-app file dialog. Without the file service, falls back to the browser's file picker. |
-| Open from URL… | – | Dialog to paste a link to a web page, Markdown, text or `.note` file. Adds `https://` if missing. Opens as a new page. |
-| Open Recent ▸ | – | Submenu with the last 10 files and links (title plus a short location hint, full path on hover). "Clear Recent" at the bottom. If a file no longer exists, it is removed from the list and the user is told. |
-| Save | Ctrl/⌘+S | Saves right away (the workspace and any linked file). Works even when a dialog is open. |
-| Save As… | Ctrl/⌘+Shift+S | In-app save dialog with file name and "Save as type": Note (`.note`) or Markdown (`.md`, text only). Asks before overwriting. After saving, the page is linked to that file. Without the file service, downloads a `.note` file instead. |
-| Rename… | F2 | Renames the page title. If the page is linked to a file, a checkbox "Also rename the file on disk" shows `old.note → new.note`. |
-| Print… | Ctrl/⌘+P | Browser print. A print stylesheet hides the sidebar, top bar, status bar and buttons, and always prints in light colors. |
-| Preferences… | Ctrl/⌘+, | Opens the Preferences dialog (section 7). |
-| Quit | Ctrl/⌘+Q | If there are unsaved changes and "Ask to save" is on, shows Save / Don't Save / Cancel with a "Don't ask again" checkbox. Then closes the app window. |
+| Item           | Shortcut       | Behavior                                                                                                                                                                                                                                 |
+| -------------- | -------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Open File…     | Ctrl/⌘+O       | Opens the in-app file dialog. Without the file service, falls back to the browser's file picker.                                                                                                                                         |
+| Open from URL… | –              | Dialog to paste a link to a web page, Markdown, text or `.note` file. Adds `https://` if missing. Opens as a new page.                                                                                                                   |
+| Open Recent ▸  | –              | Submenu with the last 10 files and links (title plus a short location hint, full path on hover). "Clear Recent" at the bottom. If a file no longer exists, it is removed from the list and the user is told.                             |
+| Save           | Ctrl/⌘+S       | Saves right away (the workspace and any linked file). Works even when a dialog is open.                                                                                                                                                  |
+| Save As…       | Ctrl/⌘+Shift+S | In-app save dialog with file name and "Save as type": Note (`.note`) or Markdown (`.md`, text only). Asks before overwriting. After saving, the page is linked to that file. Without the file service, downloads a `.note` file instead. |
+| Rename…        | F2             | Renames the page title. If the page is linked to a file, a checkbox "Also rename the file on disk" shows `old.note → new.note`.                                                                                                          |
+| Print…         | Ctrl/⌘+P       | Browser print. A print stylesheet hides the sidebar, top bar, status bar and buttons, and always prints in light colors.                                                                                                                 |
+| Preferences…   | Ctrl/⌘+,       | Opens the Preferences dialog (section 7).                                                                                                                                                                                                |
+| Quit           | Ctrl/⌘+Q       | If there are unsaved changes and "Ask to save" is on, shows Save / Don't Save / Cancel with a "Don't ask again" checkbox. Then closes the app window.                                                                                    |
 
 ### File formats
+
 - `.note`: the native, lossless format. JSON: `{ "format": "notes-page", "version": 1, "title", "icon", "cover", "content", "createdAt", "updatedAt" }`. `.json` opens the same way.
 - `.md` / `.markdown`: read and written. Headings, lists, to-dos (`- [ ]`), quotes, code fences, dividers, images and inline marks are converted both ways. A leading `# Title` becomes the page title.
 - `.txt`: opens as plain paragraphs, as a new page (not linked to the file).
@@ -89,7 +99,9 @@ A desktop-style dropdown menu. It works with the keyboard: focus moves to the fi
 - Pages linked to a `.note` or `.md` file are written back to that file on every save.
 
 ### In-app file dialog
+
 Used for Open, Save As, and choosing a folder in Preferences, so every file has a real path:
+
 - Left: "Places" (Home, Desktop, Documents, Downloads, their OneDrive versions when present, and each drive).
 - Top: Up-one-folder button, editable path bar, Go.
 - List: folders first, then files, with size and date. Click selects, double-click opens. Keyboard: ↑ ↓, Enter, Backspace goes up.
@@ -97,6 +109,7 @@ Used for Open, Save As, and choosing a folder in Preferences, so every file has 
 - Save mode rejects names with `\ / : * ? " < > |` and adds the extension automatically.
 
 ## 6. Saving and autosave
+
 - Debounced autosave after the user stops typing (default 600 ms, adjustable).
 - Status text in the top bar: "Saving...", "Saved just now", "Saved 3 min ago", "Unsaved changes" (autosave off), or an error such as "Not saved" with details on hover.
 - Saves run one at a time in a queue, so they never overlap.
@@ -104,6 +117,7 @@ Used for Open, Save As, and choosing a folder in Preferences, so every file has 
 - When the window closes: do a last save (use `fetch` with `keepalive` for the file service), and if there are unsaved changes and the preference is on, show the browser's "Leave site?" prompt.
 
 ## 7. Preferences dialog
+
 - **Language**: Suomi (default) or English, as radio buttons, each label written in its own language. Changes apply immediately, with no reload.
 - **Storage**: "This browser" (localStorage, about 5 MB) or "A folder on this computer" (saved as `notes-workspace.json` in that folder; no size limit, easy to back up or sync). The folder option has a path field and a Browse… button and is disabled, with an explanation, when the file service isn't running. Switching saves first. If the chosen folder already contains notes, ask: "Open those notes", "Replace them with my current notes", or Cancel. Show the current location. If the folder can't be read at startup, show a screen with "Try again" and "Use browser storage instead".
 - **Saving**: Autosave on/off, Autosave delay (100–60,000 ms), "Ask to save unsaved changes when closing".
@@ -111,34 +125,39 @@ Used for Open, Save As, and choosing a folder in Preferences, so every file has 
 - Store preferences in localStorage and validate them when loading.
 
 ## 8. Local file service
+
 A Vite plugin (`configureServer` and `configurePreviewServer`) that adds POST-only JSON endpoints under `/api/`:
 
-| Endpoint | Purpose |
-| --- | --- |
-| `fs/ping` | Platform, path separator, home folder, quick places and drives. The app uses this to detect that the service is available. |
-| `fs/list` | Folder contents (hide system files such as `$Recycle.Bin`, `desktop.ini`). |
-| `fs/stat`, `fs/read`, `fs/write`, `fs/rename`, `fs/mkdir` | File operations on absolute paths. `write` refuses to overwrite unless asked. |
-| `fetch-url` | Fetches a URL on the server so "Open from URL" isn't blocked by CORS. 15 s timeout, 10 MB limit. |
-| `app/quit` | Closes the launcher's app window (see section 12). |
+| Endpoint                                                  | Purpose                                                                                                                    |
+| --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| `fs/ping`                                                 | Platform, path separator, home folder, quick places and drives. The app uses this to detect that the service is available. |
+| `fs/list`                                                 | Folder contents (hide system files such as `$Recycle.Bin`, `desktop.ini`).                                                 |
+| `fs/stat`, `fs/read`, `fs/write`, `fs/rename`, `fs/mkdir` | File operations on absolute paths. `write` refuses to overwrite unless asked.                                              |
+| `fetch-url`                                               | Fetches a URL on the server so "Open from URL" isn't blocked by CORS. 15 s timeout, 10 MB limit.                           |
+| `app/quit`                                                | Closes the launcher's app window (see section 12).                                                                         |
 
 Security: accept a request only if it has the header `X-Notes-App: 1`, the Host is loopback (`localhost`, `127.0.0.1`, `[::1]`), and the Origin, if present, matches the Host. Limit request and read sizes. Turn Node errors (`ENOENT`, `EACCES`, `EBUSY`…) into short, plain messages. Every error response carries a `code` (for example `notFound`) and `params` (for example `{ path }`) so the app can show it in the user's language, plus an English `error` message as a fallback. Quick places carry an `id` (`home`, `desktop`, `documents`, `downloads`…) so the app can translate their names; drives keep their letter.
 
 Without the service (for example, a static deployment), the app still works: storage stays in the browser, Open uses the browser's file picker, and Save As downloads a file.
 
 ## 9. Public sharing
+
 - The Share popover builds a link of the form `/share#<base64url>`, where the fragment holds the whole page snapshot. Nothing is uploaded.
 - Copy button with "Copied!" feedback, an "Open preview ↗" link, and the link size in KB. Warn when the link is over 8 KB (usually because of images).
 - The shared page is read-only, with a button to duplicate it into the viewer's own notes.
 
 ## 10. Help and shortcuts
+
 - `/help` page: basic usage, every slash command, Markdown shortcuts, and keyboard shortcuts.
 - Shortcuts dialog from the sidebar.
 - Both read from one shared list of shortcuts. Show ⌘ and ⌥ on Mac, Ctrl and Alt elsewhere.
 
 ## 11. Theme
+
 - Light and dark themes with CSS variables. Follow the OS setting by default; toggle with the top-bar button or Ctrl/⌘+Shift+L, and remember the choice.
 
 ## 12. Desktop launcher (Windows, optional)
+
 - `run.bat` starts a hidden PowerShell script that: checks for Node.js, runs `npm install` on first run, starts Vite hidden on port 5173 (or reuses an instance that is already running), and opens Edge or Chrome in app mode (`--app=URL`, its own `--user-data-dir` profile, no tabs or address bar).
 - It writes the window's process ID to a file so File → Quit can close the window, and it stops the server when the window closes.
 - `create-shortcut.bat` adds a "Muistipaikka" shortcut with the app icon to the Desktop and Start menu.
@@ -146,6 +165,7 @@ Without the service (for example, a static deployment), the app still works: sto
 - App icon: a black rounded tile with a white 3D extruded "M" (grey extrusion sides), drawn by a small Pillow script into `.ico` and `public/icon.png`.
 
 ## 13. Languages (Finnish and English)
+
 - Finnish is the default for new and existing users; the choice is stored with the other preferences and applied before the first render, so nothing flashes in the wrong language. Set `<html lang>` to match.
 - Translate everything the user sees: menus, dialogs, buttons, placeholders, tooltips and `aria-label`s, status texts, error messages (including those from the file service), the help page, the shortcuts dialog, the welcome page and the browser tab title. Never translate the user's own page content.
 - Use the Finnish terms from Notion's own Finnish help (https://www.notion.com/fi/help), for example: block = *lohko*, Text = *Teksti*, Heading 1 = *Otsikko 1*, Bulleted list = *Luettelo*, Numbered list = *Numeroitu luettelo*, To-do list = *Tehtävälista*, Quote = *Lainaus*, Callout = *Huomiolohko*, Code = *Koodi*, Divider = *Jakaja*, Image = *Kuva*, slash commands = *Vinoviivakomennot*, Add icon = *Lisää kuvake*, Add cover = *Lisää kansi*, Share = *Jaa*, dark mode = *tumma tila*, Preferences = *Asetukset*, Untitled = *Nimetön*.
@@ -161,28 +181,28 @@ Without the service (for example, a static deployment), the app still works: sto
 <keyboard-shortcuts>
 Use ⌘ and ⌥ on Mac in place of Ctrl and Alt. The block shortcuts (0–8) are ⌘ ⌥ 0–8 on Mac; on Windows and Linux, accept both Ctrl Shift and Ctrl Alt.
 
-| Shortcut | Action |
-| --- | --- |
-| Ctrl B / I / U / E | Bold / italic / underline / inline code |
-| Ctrl Shift X | Strikethrough |
-| Ctrl Shift 0 | Text |
-| Ctrl Shift 1 / 2 / 3 | Heading 1 / 2 / 3 |
-| Ctrl Shift 4 | To-do |
-| Ctrl Shift 5 / 6 | Bulleted / numbered list |
-| Ctrl Shift 7 / 8 | Quote / code |
-| Tab / Shift Tab | Indent / outdent list item |
-| Ctrl Enter | Toggle to-do, leave code block |
-| Shift Enter | Line break inside a block |
-| Ctrl Alt N | New page |
-| Ctrl Shift L | Toggle dark mode |
-| Ctrl \\ | Toggle sidebar |
-| Ctrl Z / Ctrl Shift Z | Undo / redo |
-| Ctrl O | Open file |
-| Ctrl S / Ctrl Shift S | Save / save as |
-| F2 | Rename page |
-| Ctrl P | Print |
-| Ctrl , | Preferences |
-| Ctrl Q | Quit |
+| Shortcut              | Action                                  |
+| --------------------- | --------------------------------------- |
+| Ctrl B / I / U / E    | Bold / italic / underline / inline code |
+| Ctrl Shift X          | Strikethrough                           |
+| Ctrl Shift 0          | Text                                    |
+| Ctrl Shift 1 / 2 / 3  | Heading 1 / 2 / 3                       |
+| Ctrl Shift 4          | To-do                                   |
+| Ctrl Shift 5 / 6      | Bulleted / numbered list                |
+| Ctrl Shift 7 / 8      | Quote / code                            |
+| Tab / Shift Tab       | Indent / outdent list item              |
+| Ctrl Enter            | Toggle to-do, leave code block          |
+| Shift Enter           | Line break inside a block               |
+| Ctrl Alt N            | New page                                |
+| Ctrl Shift L          | Toggle dark mode                        |
+| Ctrl \\               | Toggle sidebar                          |
+| Ctrl Z / Ctrl Shift Z | Undo / redo                             |
+| Ctrl O                | Open file                               |
+| Ctrl S / Ctrl Shift S | Save / save as                          |
+| F2                    | Rename page                             |
+| Ctrl P                | Print                                   |
+| Ctrl ,                | Preferences                             |
+| Ctrl Q                | Quit                                    |
 
 Only Save works while a dialog is open; other File shortcuts wait until it closes.
 </keyboard-shortcuts>
