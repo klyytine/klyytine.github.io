@@ -1,0 +1,13 @@
+/* Site frame for the dashboard home page: personal-site name, language switch and menu. */
+.siteframe { background: var(--surface); border-bottom: 1px solid var(--border); }
+.siteframe-top { display: flex; justify-content: space-between; align-items: center; gap: 1rem; padding: 0.75rem 0 0.25rem; }
+.siteframe-name { font-weight: 700; color: var(--text); text-decoration: none; }
+.siteframe-lang { color: var(--muted); font-size: 0.9rem; }
+.siteframe-lang a { text-decoration: none; padding: 0.5rem 0.25rem; display: inline-block; }
+.siteframe-lang a.active { font-weight: 700; color: var(--text); }
+.siteframe-menu summary { cursor: pointer; font-weight: 600; padding: 0.5rem 0; color: var(--link); }
+.siteframe-menu ul { list-style: none; margin: 0; padding: 0 0 0.5rem; }
+.siteframe-menu li { margin: 0; }
+.siteframe-menu li a { display: inline-block; padding: 0.4rem 0; }
+.siteframe-menu li a.current { font-weight: 700; color: var(--text); }
+.siteframe-menu ul ul { padding: 0 0 0 1.25rem; }

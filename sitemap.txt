@@ -1,4 +1,5 @@
 https://kallelyytinen.fi/index.html
+https://kallelyytinen.fi/esittely.html
 https://kallelyytinen.fi/cv.html
 https://kallelyytinen.fi/projects.html
 https://kallelyytinen.fi/lumet.html
@@ -7,6 +8,7 @@ https://kallelyytinen.fi/muistipaikka.html
 https://kallelyytinen.fi/about.html
 https://kallelyytinen.fi/privacy.html
 https://kallelyytinen.fi/en/index.html
+https://kallelyytinen.fi/en/esittely.html
 https://kallelyytinen.fi/en/cv.html
 https://kallelyytinen.fi/en/projects.html
 https://kallelyytinen.fi/en/lumet.html
